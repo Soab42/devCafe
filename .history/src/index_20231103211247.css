@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .btn {
+    @apply flex-center gap-1 text-slate-900/80 backdrop-blur-md p-2 rounded-full cursor-pointer hover z-0;
+  }
+}
+
+.shadow-filter {
+  filter: drop-shadow(2px 1px 0.3px rgb(3, 10, 8));
+}
+
+/* In your CSS file */
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+.hover::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(226, 226, 141, 0.667);
+  width: 0px;
+  border-radius: 10rem;
+  height: 36px;
+  z-index: -1;
+  transition: all 0.61s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+.hover:hover::before {
+  width: 150px;
+}

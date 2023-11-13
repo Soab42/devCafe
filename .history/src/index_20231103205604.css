@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+}
+
+.shadow-filter {
+  filter: drop-shadow(2px 1px 0.3px rgb(3, 10, 8));
+}
+
+/* In your CSS file */
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+.hover::before {
+  content: "";
+  position: absolute;
+  background-color: aqua;
+  width: 0px;
+  border-radius: 10rem;
+  height: 36px;
+  z-index: -1;
+}
+.hover:hover::before {
+  width: 150px;
+}

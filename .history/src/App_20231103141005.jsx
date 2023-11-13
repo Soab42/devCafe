@@ -1,0 +1,16 @@
+import { Provider } from "react-redux";
+import DevCafeMain from "./DevCafeMain";
+import { store } from "./app/store";
+function App() {
+  return (
+    <div className="w-screen h-screen bg-[rgb(18,26,45)]">
+      <Provider store={store}>
+        <div>
+          <DevCafeMain />
+        </div>
+      </Provider>
+    </div>
+  );
+}
+
+export default App;

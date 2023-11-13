@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .btn {
+    @apply flex-center gap-1 text-slate-900/80  bg-blue-400/20 p-2 rounded-full cursor-pointer z-0;
+  }
+  .title {
+    @apply text-xl font-bold;
+  }
+  .tag {
+    @apply bg-blue-900/70 px-2 p-1 text-center text-slate-500  rounded-sm hover:bg-blue-700/80 hover:text-black/50 duration-300 min-w-[1.5rem] text-[10px];
+  }
+  .card {
+    @apply bg-slate-400/40 px-2 mt-2;
+  }
+}
+
+.shadow-filter {
+  filter: drop-shadow(2px 1px 0.3px rgb(3, 10, 8));
+}
+
+/* In your CSS file */
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+.hover::before {
+  content: "";
+  position: absolute;
+  background-color: #936648cb;
+  width: 0px;
+  border-radius: 10rem;
+  transform: translateX(-50px);
+  height: 36px;
+  z-index: -1;
+  transition: all 0.35s cubic-bezier(0.545, 0.05, 0.95, 0.95);
+}
+.hover:hover::before {
+  width: 155px;
+  transform: translateX(0px);
+}
+
+.fade {
+  animation: fade 0.5s cubic-bezier(0.6, 0.04, 0.98, 0.335) forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translate(5px);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.terminal::placeholder {
+  color: rgba(240, 248, 255, 0.116);
+}

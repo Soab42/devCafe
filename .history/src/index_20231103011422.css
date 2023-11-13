@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shadow-filter{
+    filter: drop-shadow(2px 1px 0.5px rgb(3, 6, 1));
+}

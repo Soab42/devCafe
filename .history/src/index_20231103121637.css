@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shadow-filter {
+  filter: drop-shadow(2px 1px 0.3px rgb(3, 10, 8));
+}
+
+/* In your CSS file */
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}

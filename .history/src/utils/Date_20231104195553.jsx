@@ -1,0 +1,6 @@
+export const FullDate = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return day + "-" + (month > 9 ? month : "0" + month) + "-" + year;
+};

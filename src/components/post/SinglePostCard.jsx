@@ -1,14 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { singleQuestionsRouteOn } from "../../feature/route/routeSlice";
 
 export default function SinglePostCard() {
+  const dispatch = useDispatch();
+  const setQuestion = () => {
+    dispatch(singleQuestionsRouteOn());
+  };
   return (
     <div className="card">
       <div className="flex flex-col gap-2 justify-center">
         <h3 className="title font-bold underline">
-          <a
-            href="/questions/77460090/convert-curl-to-python-requests-upload-file"
-            className="s-link"
-          >
+          <a href="#" className="s-link" onClick={setQuestion}>
             Convert curl to python requests (upload file)
           </a>
         </h3>

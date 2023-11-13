@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useDispatch } from "react-redux";
 import Answer from "./post/Answer";
 import Author from "./post/Author";
 import Tag from "./post/Tag";
@@ -6,12 +7,21 @@ import TextWithMarkup from "./post/TextWithMarkup";
 import Title from "./post/Title";
 import Comments from "./post/comments";
 import { postData } from "./post/postData";
+import { allQuestionsRouteOn } from "../feature/route/routeSlice";
 // const day = require("dayjs");
 export default function SinglePostContent() {
+  const dispatch = useDispatch();
+  const setRoute = () => dispatch(allQuestionsRouteOn());
   const text = postData[0];
   // console.log(text);
   return (
     <div className="flex flex-col gap-2 relative pb-4">
+      <div className="route flex gap-1">
+        <button className="underline text-sky-600" onClick={setRoute}>
+          home
+        </button>
+        /<button className="text-sky-600">post</button>
+      </div>
       {/* post title */}
 
       <Title title={text.title} />

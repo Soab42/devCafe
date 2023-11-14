@@ -1,6 +1,6 @@
-import Content from "./components/Content";
+import Content from "./Content";
 import Layout from "./components/Layout";
-import Navbar from "./components/Navbar";
+
 export default function DevCafeMain() {
   return (
     <Layout>

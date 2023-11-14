@@ -1,12 +1,12 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import CommentForm from "../components/CommentForm";
 
 export default function Comments({ comments }) {
   return (
     comments.length > 0 && (
-      <div>
+      <div className="text-gray-500">
         <div
-          className="text-sm bg-slate-500 pl-4 flex 
+          className="text-sm shadow-sm p-1 my-1 shadow-green-400/20 pl-4 flex 
       items-center"
         >
           Comments

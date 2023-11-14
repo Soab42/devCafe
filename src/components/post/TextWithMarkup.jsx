@@ -8,7 +8,7 @@ export default function TextWithMarkup({ text }) {
   // console.log(chunks);
 
   return (
-    <div>
+    <div className="text-gray-400">
       {chunks.map((chunk, index) => {
         const text = chunk.replace(/\s+#/g, "#");
 

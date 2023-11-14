@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism-okaidia.css";
+import "prismjs/themes/prism-coy.min.css";
 function CodeViewer({ text }) {
   return (
-    <div>
+    <div className="opacity-80">
       <CodeView code={text} language="javascript" />
     </div>
   );

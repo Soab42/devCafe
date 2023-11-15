@@ -29,7 +29,7 @@ export default function TerminalButton({ handleLogin, mood }) {
       </span>
       <span className="text-[8px] font-mono">
         {!mood ? (
-          "yarn dev"
+          "yarn add login"
         ) : (
           <div className="flex-center text-[8px] gap-0.5">
             <span className="animate-spin">

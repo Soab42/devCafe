@@ -9,7 +9,7 @@ export default function AllPostList() {
         <Search />
       </h1>
 
-      <div className="flex flex-col gap-2 mt-2 overflow-scroll h-[85vh] pb-10">
+      <div className="flex flex-col gap-2 mt-2">
         <SinglePostCard />
         <SinglePostCard />
         <SinglePostCard />

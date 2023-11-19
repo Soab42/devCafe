@@ -3,24 +3,23 @@ import { PiPowerThin } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import useLocalStorage from "../common/hooks/useLocalStorage";
 import { closeModal, openModal } from "../feature/loginmodal/modalSlice";
-import { userSignOut } from "../feature/user/authSlice";
-import { Auth } from "../firebase";
-import LoginModal from "./LoginModal";
-import TerminalButton from "./components/TerminalButton";
 import {
-  allQuestionsRouteOn,
-  profileRouteOn,
   aboutRouteOn,
   addQuestionRouteOn,
+  allQuestionsRouteOn,
+  profileRouteOn,
 } from "../feature/route/routeSlice";
+import { userSignOut } from "../feature/user/authSlice";
+import { Auth } from "../firebase";
 import Icon from "./Icon";
-import { AiOutlineSearch } from "react-icons/ai";
+import LoginModal from "./LoginModal";
+import TerminalButton from "./components/TerminalButton";
 export default function Navbar() {
   const user = useSelector((state) => state?.users);
   const mood = useSelector((state) => state?.mood?.mood);
   const route = useSelector((state) => state?.route);
   const [value, setValue] = useLocalStorage("Auth", undefined);
-  console.log("navbar", mood);
+  // console.log("navbar", mood);
   const dispatch = useDispatch();
 
   const handleLogin = () => {

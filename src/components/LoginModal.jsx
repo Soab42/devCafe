@@ -12,10 +12,11 @@ import { useEffect, useState } from "react";
 
 const Terminal = () => {
   const [value, setValue] = useLocalStorage("Auth", undefined);
-  const [login, SetLogin] = useState();
+  const [login, SetLogin] = useState("");
+  const [error, setError] = useState("");
   const mood = useSelector((state) => state.mood.mood);
   const dispatch = useDispatch();
-  console.log("modal", mood);
+  // console.log("modal", mood);
   // Create a ref for the input element
 
   const handleGoogleSignIn = () => {
@@ -49,6 +50,7 @@ const Terminal = () => {
       })
       .catch((error) => {
         console.log(error);
+        setError(error.message);
       });
   };
   const handleGitHubSignIn = () => {
@@ -74,6 +76,7 @@ const Terminal = () => {
       })
       .catch((error) => {
         console.log(error);
+        setError("Account exist with different address");
       });
   };
   const handleLogin = (e) => {
@@ -83,16 +86,21 @@ const Terminal = () => {
         handleGoogleSignIn();
       } else if (login == "github") {
         handleGitHubSignIn();
+      } else {
+        setError("Sorry! google Or github only");
       }
     }
   };
   useEffect(() => {
     if (value) dispatch(userLoggedIn(value));
+    return () => {
+      setError("");
+    };
   }, [value, dispatch]);
   return (
     mood && (
       <div className="bg-gray-900 p-0.5 absolute top-[24px] right-0 z-30 fade">
-        <div className="bg-black px-2 gap-2 shadow-lg">
+        <div className="bg-black px-2 shadow-lg">
           <pre
             className="text-sky-600 flex flex-col h-16 w-36
          text-[8px] gap-0"
@@ -105,11 +113,17 @@ const Terminal = () => {
                 name=""
                 id=""
                 placeholder="google/github"
-                onChange={(e) => SetLogin(e.target.value)}
+                onChange={(e) => {
+                  SetLogin(e.target.value);
+                  setError("");
+                }}
                 onKeyUp={handleLogin}
-                className="bg-inherit h-5 pl-1 outline-none terminal text-[#936648]"
+                className="bg-inherit h-5 pl-1 outline-none terminal lowercase text-[#936648]"
               />
             </div>
+            <label className="text-red-600/40 text-[7px] absolute top-4">
+              {error && error}
+            </label>
           </pre>
         </div>
       </div>

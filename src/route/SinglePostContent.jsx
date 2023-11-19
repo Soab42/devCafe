@@ -18,7 +18,7 @@ export default function SinglePostContent() {
   const text = postData[0];
   // console.log(text);
   return (
-    <div className="flex flex-col gap-2 relative pb-4 pt-1 h-[90vh] overflow-scroll">
+    <div className="flex flex-col gap-2 relative pb-4 pt-1">
       <div className="route flex gap-1">
         <button className="underline text-sky-600" onClick={setRoute}>
           home

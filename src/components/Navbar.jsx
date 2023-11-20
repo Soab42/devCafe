@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { PiPowerThin } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +7,7 @@ import { closeModal, openModal } from "../feature/loginmodal/modalSlice";
 import {
   aboutRouteOn,
   addQuestionRouteOn,
+  addRoute,
   allQuestionsRouteOn,
   profileRouteOn,
 } from "../feature/route/routeSlice";
@@ -14,11 +16,17 @@ import { Auth } from "../firebase";
 import Icon from "./Icon";
 import LoginModal from "./LoginModal";
 import TerminalButton from "./components/TerminalButton";
+import { addSingleData } from "../feature/data/singleDataSlice";
 export default function Navbar() {
   const user = useSelector((state) => state?.users);
   const mood = useSelector((state) => state?.mood?.mood);
   const route = useSelector((state) => state?.route);
   const [value, setValue] = useLocalStorage("Auth", undefined);
+  const [singleDataValue, setSingleDataValue] = useLocalStorage(
+    "singleData",
+    undefined
+  );
+  const [routeValue, setRouteValue] = useLocalStorage("route", undefined);
   // console.log("navbar", mood);
   const dispatch = useDispatch();
 
@@ -32,6 +40,11 @@ export default function Navbar() {
     dispatch(allQuestionsRouteOn());
     signOut(Auth);
   };
+  useEffect(() => setRouteValue(route), [route, setRouteValue]);
+  useEffect(() => {
+    if (routeValue) dispatch(addRoute(routeValue));
+    if (singleDataValue) dispatch(addSingleData(singleDataValue));
+  }, [singleDataValue, routeValue, dispatch]);
 
   return (
     <div className="flex-center font-bold text-xl h-10 title  text-sky-600 w-full bg-slate-700/10 shadow-sm shadow-sky-600/30">

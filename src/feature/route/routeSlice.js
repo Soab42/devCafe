@@ -11,6 +11,7 @@ const routeSlice = createSlice({
     profileRouteOn: () => "profile",
     addQuestionRouteOn: () => "add",
     aboutRouteOn: () => "about",
+    addRoute: (state, action) => action.payload,
   },
 });
 
@@ -20,5 +21,6 @@ export const {
   addQuestionRouteOn,
   profileRouteOn,
   aboutRouteOn,
+  addRoute,
 } = routeSlice.actions;
 export default routeSlice.reducer;

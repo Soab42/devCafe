@@ -1,61 +1,39 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { useDispatch } from "react-redux";
 import { singleQuestionsRouteOn } from "../../feature/route/routeSlice";
-
-export default function SinglePostCard() {
+import { FullDate } from "../../utils/Date";
+import { addSingleData } from "../../feature/data/singleDataSlice";
+import useLocalStorage from "../../common/hooks/useLocalStorage";
+export default function SinglePostCard({ data }) {
+  const [singleDataValue, setSingleDataValue] = useLocalStorage(
+    "singleData",
+    undefined
+  );
   const dispatch = useDispatch();
   const setQuestion = () => {
     dispatch(singleQuestionsRouteOn());
+    dispatch(addSingleData(data));
+    setSingleDataValue(data);
   };
   return (
-    <div className="card">
+    <div
+      className="card hover:backdrop-blur-sm hover:shadow-xl duration-100 cursor-pointer"
+      onClick={setQuestion}
+    >
       <div className="flex flex-col gap-2 justify-center">
-        <h3 className="title font-bold underline">
-          <a href="#" className="s-link" onClick={setQuestion}>
-            Convert curl to python requests (upload file)
-          </a>
+        <h3 className="title font-bold">
+          <p>{data?.title}</p>
         </h3>
-        <div className="text-justify line-clamp-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-          quisquam accusantium voluptatem commodi, esse similique dolore ea
-          harum alias, adipisci veritatis excepturi quaerat labore! Distinctio
-          quibusdam autem ratione! Unde, maiores. Lorem, ipsum dolor sit amet
-          consectetur adipisicing elit. Similique debitis labore minus ad est
-          accusantium placeat ab natus veritatis nobis eius, harum architecto,
-          culpa accusamus dolores, ipsam consequatur at sint animi praesentium
-          atque quam eos eaque distinctio. Laudantium neque eveniet quia atque
-          ullam saepe explicabo, mollitia ipsa, eum harum odio!
-        </div>
+        <div className="text-justify line-clamp-2">{data?.post}</div>
         <div className="flex justify-between items-end">
           <div className="">
             <ul className="flex gap-2 p-1">
-              <li className="tag">
-                <a
-                  href="/questions/tagged/python"
-                  className="post-tag flex--item mt0 js-tagname-python"
-                  title="show questions tagged 'python'"
-                >
-                  python
-                </a>
-              </li>
-              <li className="tag">
-                <a
-                  href="/questions/tagged/curl"
-                  className="post-tag flex--item mt0 js-tagname-curl"
-                  title="show questions tagged 'curl'"
-                >
-                  curl
-                </a>
-              </li>
-              <li className="tag">
-                <a
-                  href="/questions/tagged/python-requests"
-                  className="post-tag flex--item mt0 js-tagname-python-requests"
-                  title=""
-                >
-                  python-requests
-                </a>
-              </li>
+              {data?.tags.map((tag) => (
+                <li className="tag" key={tag}>
+                  {tag}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -76,27 +54,11 @@ export default function SinglePostCard() {
             </a>
 
             <div className="flex">
-              <div className="s-user-card--link d-flex gs4">
-                <a href="/users/16298153/gawain" className="flex--item">
-                  Gawain
-                </a>
-              </div>
-
-              <ul className="s-user-card--awards">
-                <li className="s-user-card--rep">
-                  <span
-                    className="todo-no-class-here"
-                    title="reputation score "
-                    dir="ltr"
-                  >
-                    133
-                  </span>
-                </li>
-              </ul>
+              <div className="s-user-card--link d-flex gs4">{data?.author}</div>
             </div>
 
             <time className="s-user-card--time">
-              asked <span>2 hours ago</span>
+              asked <span>{FullDate(data?.time)}</span>
             </time>
           </div>
         </div>

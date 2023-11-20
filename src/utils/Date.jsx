@@ -1,7 +1,8 @@
 export const FullDate = (date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
+  const dateTime = new Date(date);
+  const day = dateTime.getDate();
+  const month = dateTime.getMonth() + 1;
+  const year = dateTime.getFullYear();
 
   const loadingZero = (number) => {
     let loadedZero;

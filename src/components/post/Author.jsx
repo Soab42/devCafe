@@ -9,7 +9,7 @@ export default function Author({ author, time, ans }) {
       <div>
         <div className="text-blue-400 font-bold">{author}</div>
         <div className="text-gray-500">
-          {ans ? "Answered On" : "Asked On"}{" "}
+          {ans ? "Answered On" : "Asked On"}
           <span className="text-blue-400/70">{FullDate(time)} </span>
         </div>
       </div>

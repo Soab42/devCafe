@@ -11,7 +11,8 @@ export default function TitleInput({ setInputSwitch, inputSwitch }) {
       </div>
       <input
         type="text"
-        className="w-full h-8 bg-inherit ring-1 rounded-md outline-none text-slate-300/70 pl-4 capitalize"
+        name="title"
+        className="w-full h-8 bg-inherit ring-1 rounded-md outline-none text-slate-300/70 pl-4 "
       />
 
       {inputSwitch == 0 && (

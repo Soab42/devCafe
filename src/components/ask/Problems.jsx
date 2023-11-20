@@ -2,7 +2,11 @@ import React from "react";
 
 export default function Problems({ setInputSwitch, inputSwitch }) {
   return (
-    <div className="backdrop-blur-xl shadow-xl p-2 flex flex-col gap-2 rounded-sm">
+    <div
+      className={`backdrop-blur-xl shadow-xl p-2 flex flex-col gap-2 rounded-sm ${
+        inputSwitch < 1 && "opacity-30"
+      }`}
+    >
       <div>
         <p className="text-sm font-semibold text-orange-600/70">
           What are the details of your problem?
@@ -14,7 +18,9 @@ export default function Problems({ setInputSwitch, inputSwitch }) {
       </div>
       <textarea
         type="text"
-        className="w-full h-24 bg-inherit ring-1 rounded-md outline-none text-slate-300/70 pl-4 capitalize"
+        name="problems"
+        disabled={inputSwitch < 1}
+        className="w-full h-24 bg-inherit ring-1 rounded-md outline-none text-slate-300/70  p-2"
       />
 
       {inputSwitch === 1 && (

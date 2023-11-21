@@ -46,7 +46,7 @@ export default function SinglePostContent() {
 
       {<TextWithMarkup text={text?.post} />}
       {/* author  */}
-      <Author author={text?.author} time={text?.time} icon={text?.icon} />
+      <Author author={text?.author} time={text?.time} />
       <div className="h-2"></div>
       <Comments comments={text?.comment} />
       <div className="h-2"></div>

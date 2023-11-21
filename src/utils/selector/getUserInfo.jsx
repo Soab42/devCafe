@@ -1,8 +1,8 @@
 // selectors.js
 import { createSelector } from "reselect";
 
-const getUser = (state) => state.users.user;
-const getAccessToken = (state) => state.users.user.accessToken;
+const getUser = (state) => state?.users;
+const getAccessToken = (state) => state?.users;
 
 export const getUserInfo = createSelector(
   [getUser, getAccessToken],

@@ -1,6 +1,6 @@
 import React from "react";
 import { randomIcons } from "./postData";
-import { FullDate } from "../../utils/Date";
+import { formatDate } from "../../utils/Date";
 import Comments from "./comments";
 import Author from "./Author";
 import AnswerForm from "../components/AnswerForm";

@@ -30,4 +30,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const App = initializeApp(firebaseConfig);
 export const Auth = getAuth(App);
-export const database = getDatabase(App);
+export const DB = getDatabase(App);

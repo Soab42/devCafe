@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { singleQuestionsRouteOn } from "../../feature/route/routeSlice";
-import { FullDate } from "../../utils/Date";
+import { formatDate } from "../../utils/Date";
 import { addSingleData } from "../../feature/data/singleDataSlice";
 import useLocalStorage from "../../common/hooks/useLocalStorage";
 export default function SinglePostCard({ data }) {
@@ -58,7 +58,7 @@ export default function SinglePostCard({ data }) {
             </div>
 
             <time className="s-user-card--time">
-              asked <span>{FullDate(data?.time)}</span>
+              asked <span>{formatDate(data?.time)}</span>
             </time>
           </div>
         </div>

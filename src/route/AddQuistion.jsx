@@ -12,11 +12,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { addData } from "../database/addData";
 import { singleQuestionsRouteOn } from "../feature/route/routeSlice";
 import { addSingleData } from "../feature/data/singleDataSlice";
+import useLocalStorage from "../common/hooks/useLocalStorage";
 
 export default function AddQuestion() {
   const [inputSwitch, setInputSwitch] = useState(0);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.user);
+  const [singleDataValue, setSingleDataValue] = useLocalStorage(
+    "singleData",
+    undefined
+  );
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch(addLoading());
@@ -38,9 +43,10 @@ export default function AddQuestion() {
     }, []);
     // console.log(formData);
     const uploadData = addData({ ...formData, tags }, user);
-    dispatch(addSingleData(uploadData));
     if (uploadData) {
       // console.log(uploadData);
+      setSingleDataValue(uploadData);
+      dispatch(addSingleData(uploadData));
       dispatch(singleQuestionsRouteOn());
     }
   };

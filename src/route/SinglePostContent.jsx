@@ -44,14 +44,14 @@ export default function SinglePostContent() {
       <hr />
       {/* main post content  */}
 
-      {<TextWithMarkup text={text?.post} />}
+      {<TextWithMarkup text={text?.post.try} />}
       {/* author  */}
       <Author author={text?.author} time={text?.time} />
       <div className="h-2"></div>
-      <Comments comments={text?.comment} />
+      <Comments comments={text?.comment || []} />
       <div className="h-2"></div>
 
-      <Answer answer={text?.answer} />
+      <Answer answer={text?.answer || []} />
     </div>
   );
 }

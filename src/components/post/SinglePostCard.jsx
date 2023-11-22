@@ -12,9 +12,9 @@ export default function SinglePostCard({ data }) {
   );
   const dispatch = useDispatch();
   const setQuestion = () => {
-    dispatch(singleQuestionsRouteOn());
     dispatch(addSingleData(data));
     setSingleDataValue(data);
+    dispatch(singleQuestionsRouteOn());
   };
   return (
     <div
@@ -25,7 +25,7 @@ export default function SinglePostCard({ data }) {
         <h3 className="title font-bold">
           <p>{data?.title}</p>
         </h3>
-        <div className="text-justify line-clamp-2">{data?.post}</div>
+        <div className="text-justify line-clamp-2">{data?.post.problem}</div>
         <div className="flex justify-between items-end">
           <div className="">
             <ul className="flex gap-2 p-1">
@@ -44,7 +44,7 @@ export default function SinglePostCard({ data }) {
             >
               <div className="gravatar-wrapper-16">
                 <img
-                  src="https://www.gravatar.com/avatar/85e71ff0e414e6d20d57b318087e2641?s=32&amp;d=identicon&amp;r=PG&amp;f=y&amp;so-version=2"
+                  src={data?.author.photoURL}
                   alt="Gawain's user avatar"
                   width="16"
                   height="16"
@@ -54,7 +54,9 @@ export default function SinglePostCard({ data }) {
             </a>
 
             <div className="flex">
-              <div className="s-user-card--link d-flex gs4">{data?.author}</div>
+              <div className="s-user-card--link d-flex gs4">
+                {data?.author.name}
+              </div>
             </div>
 
             <time className="s-user-card--time">

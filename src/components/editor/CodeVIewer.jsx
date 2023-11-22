@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism-coy.min.css";
+import "prismjs/themes/prism-coy.css";
 function CodeViewer({ text }) {
   return (
     <div className="opacity-80">

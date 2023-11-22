@@ -2,9 +2,43 @@ import { useSelector } from "react-redux";
 import Search from "../components/components/Search";
 import SinglePostCard from "../components/post/SinglePostCard";
 import { postData } from "../data";
+import { useEffect, useState } from "react";
+import { ref, onValue } from "firebase/database";
+import { DB } from "../firebase";
 export default function AllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";
   // console.log(search);
+  const [postData, setPostData] = useState([]);
+  useEffect(() => {
+    function getData() {
+      const dataRef = ref(DB, "devcafe/data");
+      const postsArray = [];
+
+      onValue(dataRef, (snapshot) => {
+        // Check if there is any data in the snapshot
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+
+          // Iterate through user IDs
+          Object.keys(data).forEach((userId) => {
+            // Check if the user has a "post" node
+            if (data[userId].post) {
+              // Iterate through posts for the current user
+              Object.values(data[userId].post).forEach((postObject) => {
+                postsArray.push(postObject);
+              });
+            }
+          });
+
+          // At this point, postsArray contains all posts from all user IDs
+          setPostData(postsArray);
+        } else {
+          console.log("No data found");
+        }
+      });
+    }
+    getData();
+  }, []);
   return (
     <div>
       <h1 className="title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">

@@ -3,7 +3,7 @@ import CommentForm from "../components/CommentForm";
 
 export default function Comments({ comments }) {
   return (
-    comments.length > 0 && (
+    comments.length >= 0 && (
       <div className="text-gray-500">
         <div
           className="text-sm shadow-sm p-1 my-1 shadow-green-400/20 pl-4 flex 

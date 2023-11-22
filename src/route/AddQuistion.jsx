@@ -13,11 +13,12 @@ import { addData } from "../database/addData";
 import { singleQuestionsRouteOn } from "../feature/route/routeSlice";
 import { addSingleData } from "../feature/data/singleDataSlice";
 import useLocalStorage from "../common/hooks/useLocalStorage";
+import { getUserInfo } from "../utils/selector/getUserInfo";
 
 export default function AddQuestion() {
   const [inputSwitch, setInputSwitch] = useState(0);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.users.user);
+  const { user } = useSelector(getUserInfo);
   const [singleDataValue, setSingleDataValue] = useLocalStorage(
     "singleData",
     undefined
@@ -50,7 +51,7 @@ export default function AddQuestion() {
       dispatch(singleQuestionsRouteOn());
     }
   };
-  // console.log(inputSwitch);
+  console.log(inputSwitch);
   return (
     <div className="">
       <form

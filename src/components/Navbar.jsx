@@ -10,6 +10,7 @@ import {
   addRoute,
   allQuestionsRouteOn,
   profileRouteOn,
+  singleQuestionsRouteOn,
 } from "../feature/route/routeSlice";
 import { userSignOut } from "../feature/user/authSlice";
 import { Auth } from "../firebase";
@@ -40,11 +41,32 @@ export default function Navbar() {
     dispatch(allQuestionsRouteOn());
     signOut(Auth);
   };
-  useEffect(() => setRouteValue(route), [route, setRouteValue]);
+  // useEffect(() => setRouteValue(route), []);
   useEffect(() => {
     if (routeValue) dispatch(addRoute(routeValue));
     if (singleDataValue) dispatch(addSingleData(singleDataValue));
-  }, [singleDataValue, routeValue, dispatch]);
+  }, []);
+  const handleRouteChange = (routing) => {
+    if (routing === "all") {
+      setRouteValue(routing);
+      dispatch(allQuestionsRouteOn());
+    } else if (routing === "single") {
+      dispatch(singleQuestionsRouteOn());
+      setRouteValue(routing);
+    } else if (routing === "profile") {
+      setRouteValue(routing);
+      dispatch(profileRouteOn());
+    } else if (routing === "add") {
+      setRouteValue(routing);
+      dispatch(addQuestionRouteOn());
+    } else if (routing === "about") {
+      setRouteValue(routing);
+      dispatch(aboutRouteOn());
+    } else {
+      setRouteValue("all");
+      dispatch(allQuestionsRouteOn());
+    }
+  };
 
   return (
     <div className="flex-center font-bold text-xl h-10 title  text-sky-600 w-full bg-slate-700/10 shadow-sm shadow-sky-600/30">
@@ -55,14 +77,14 @@ export default function Navbar() {
         <div className="flex-center gap-2  font-thin text-sm">
           <button
             className={`${route === "all" && "text-[#936648]"} navLink`}
-            onClick={() => dispatch(allQuestionsRouteOn())}
+            onClick={() => handleRouteChange("all")}
           >
             Home
           </button>
           {user.user && (
             <button
               className={`${route === "profile" && "text-[#936648]"} navLink`}
-              onClick={() => dispatch(profileRouteOn())}
+              onClick={() => handleRouteChange("profile")}
             >
               Profile
             </button>
@@ -70,14 +92,14 @@ export default function Navbar() {
           {user.user && (
             <button
               className={`${route === "add" && "text-[#936648]"} navLink`}
-              onClick={() => dispatch(addQuestionRouteOn())}
+              onClick={() => handleRouteChange("add")}
             >
               Ask Question
             </button>
           )}
           <button
             className={`${route === "about" && "text-[#936648]"} navLink`}
-            onClick={() => dispatch(aboutRouteOn())}
+            onClick={() => handleRouteChange("about")}
           >
             About
           </button>

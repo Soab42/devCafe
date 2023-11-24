@@ -10,8 +10,11 @@ export default function SinglePostCard({ data }) {
     "singleData",
     undefined
   );
+  const [routeValue, setRouteValue] = useLocalStorage("route", undefined);
+
   const dispatch = useDispatch();
   const setQuestion = () => {
+    setRouteValue("single");
     dispatch(addSingleData(data));
     setSingleDataValue(data);
     dispatch(singleQuestionsRouteOn());
@@ -25,7 +28,9 @@ export default function SinglePostCard({ data }) {
         <h3 className="title font-bold">
           <p>{data?.title}</p>
         </h3>
-        <div className="text-justify line-clamp-2">{data?.post.problem}</div>
+        <div className="text-justify line-clamp-2 capitalize">
+          {data?.post.problem}
+        </div>
         <div className="flex justify-between items-end">
           <div className="">
             <ul className="flex gap-2 p-1">
@@ -38,29 +43,25 @@ export default function SinglePostCard({ data }) {
           </div>
 
           <div className="flex gap-1">
-            <a
-              href="/users/16298153/gawain"
-              className="s-avatar s-avatar__16 s-user-card--avatar"
-            >
-              <div className="gravatar-wrapper-16">
-                <img
-                  src={data?.author.photoURL}
-                  alt="Gawain's user avatar"
-                  width="16"
-                  height="16"
-                  className="s-avatar--image"
-                />
-              </div>
-            </a>
-
-            <div className="flex">
-              <div className="s-user-card--link d-flex gs4">
-                {data?.author.name}
-              </div>
+            <div className="gravatar-wrapper-16">
+              <img
+                src={data?.author.photoURL}
+                alt="Gawain's user avatar"
+                width="16"
+                height="16"
+                className="s-avatar--image"
+              />
             </div>
 
-            <time className="s-user-card--time">
-              asked <span>{formatDate(data?.time)}</span>
+            <div className="flex">
+              <button className="text-blue-600">{data?.author.name}</button>
+            </div>
+
+            <time>
+              asked{" "}
+              <span className="font-semibold text-pink-400/60">
+                {formatDate(data?.time)}
+              </span>
             </time>
           </div>
         </div>

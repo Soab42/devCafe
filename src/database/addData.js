@@ -8,7 +8,7 @@ export const addData = (data, user) => {
   const post = {
     tags: data.tags,
     title: data.title,
-    post: data.problems + data.try,
+    post: { problem: data.problems, try: data.try },
     answer: [],
     comment: [],
     author: user,

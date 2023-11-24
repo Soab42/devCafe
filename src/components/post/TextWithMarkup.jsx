@@ -19,8 +19,8 @@ export default function TextWithMarkup({ text }) {
         } else {
           // If the chunk is plain text, render it as plain text
           return (
-            <span key={index} className="text-justify">
-              {text}
+            <span key={index} className="text-justify fi">
+              {capitalizeSentences(text)}
             </span>
           );
         }
@@ -28,3 +28,7 @@ export default function TextWithMarkup({ text }) {
     </div>
   );
 }
+// Function to capitalize the first letter of each sentence
+const capitalizeSentences = (text) => {
+  return text.replace(/(^|\.\s+)([a-z])/g, (match) => match.toUpperCase());
+};

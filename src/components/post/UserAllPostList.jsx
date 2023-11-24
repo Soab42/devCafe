@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
-import Search from "../components/components/Search";
-import SinglePostCard from "../components/post/SinglePostCard";
-import { postData } from "../data";
+import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database";
-import { DB } from "../firebase";
-export default function AllPostList() {
+import { useSelector } from "react-redux";
+import { DB } from "../../firebase";
+import Search from "../components/Search";
+import SinglePostCard from "./SinglePostCard";
+export default function UserAllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";
+  const user = useSelector((state) => state.users.user);
   // console.log(search);
   const [postData, setPostData] = useState([]);
   useEffect(() => {
@@ -18,15 +18,16 @@ export default function AllPostList() {
         // Check if there is any data in the snapshot
         if (snapshot.exists()) {
           const data = snapshot.val();
-
           // Iterate through user IDs
           Object.keys(data).forEach((userId) => {
             // Check if the user has a "post" node
-            if (data[userId].post) {
-              // Iterate through posts for the current user
-              Object.values(data[userId].post).forEach((postObject) => {
-                postsArray.push(postObject);
-              });
+            if (userId === user.id) {
+              if (data[userId].post) {
+                // Iterate through posts for the current user
+                Object.values(data[userId].post).forEach((postObject) => {
+                  postsArray.push(postObject);
+                });
+              }
             }
           });
 
@@ -40,7 +41,7 @@ export default function AllPostList() {
     getData();
   }, []);
   return (
-    <div className="h-[92vh]">
+    <div>
       <h1 className="title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
         All Questions
         <Search />

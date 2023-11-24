@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import LeftBar from "./LeftBar";
+
 import Loading from "./Loading";
 
 export default function Layout({ children }) {

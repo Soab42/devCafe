@@ -7,16 +7,18 @@ import {
   AiFillMail,
   AiOutlineUser,
 } from "react-icons/ai";
+import AllPostList from "./AllPostList";
+import UserAllPostList from "../components/post/UserAllPostList";
 export default function Profile() {
   const { user } = useSelector(getUserInfo);
-  console.log(user);
+
   return (
-    <div className="w-full flex-center mt-10 ">
+    <div className="w-full  mt-5 gap-5 flex flex-col h-[90vh]">
       <div className="ring-2 p-2 rounded-md shadow-2xl shadow-sky-500/20 backdrop-blur-lg bg-black/20">
         <div className="title rounded-md text-2xl bg-slate-700/10 shadow-blue-600/10 shadow-xl ">
           <Icon />
         </div>
-        <div className="user flex">
+        <div className="user flex justify-center">
           <div className="relative flex-center p-2 rounded-full">
             <img
               src={user.photoURL}
@@ -52,6 +54,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      <UserAllPostList />
     </div>
   );
 }

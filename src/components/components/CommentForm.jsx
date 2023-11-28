@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../feature/loginmodal/modalSlice";
-export default function CommentForm() {
+import { getSinglePost } from "../../database/getSinglePost";
+import { addSingleData } from "../../feature/data/singleDataSlice";
+import { addComment } from "../../database/addComment";
+export default function CommentForm({ answerId }) {
   const accessToken = useSelector((state) => state.users.accessToken);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+
+  const { userId, postId } = useSelector((state) => state.singleData);
+
+  const user = useSelector((state) => state.users.user);
+
+  const inputRef = useRef();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    addComment(user, userId, postId, inputRef.current.value, answerId);
+
+    const newData = await getSinglePost(userId, postId);
+    dispatch(addSingleData({ ...newData, userId: userId, postId: postId }));
+    // console.log("newData", newData);
+    inputRef.current.value = null;
+  };
+
   const handleSelection = () => {
     if (accessToken) {
       setShow(true);
@@ -13,17 +32,21 @@ export default function CommentForm() {
     }
   };
   return (
-    <div className="p-2">
+    <div className="p-2   ">
       {!show ? (
-        <span className="cursor-pont" onClick={handleSelection}>
+        <span
+          className="cursor-pointer rounded-md w-32 bg-slate-400/20 p-2"
+          onClick={handleSelection}
+        >
           Add a comment
         </span>
       ) : (
         accessToken && (
-          <form className={`flex-center gap-2`}>
+          <form className={`flex-center gap-2`} onSubmit={handleSubmit}>
             <textarea
               name="comment"
               id="comment"
+              ref={inputRef}
               className="w-[80%] p-1 bg-inherit ring-1"
             />
             <button

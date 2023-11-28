@@ -2,7 +2,7 @@
 import CodeViewer from "../editor/CodeVIewer";
 export default function TextWithMarkup({ text }) {
   // Define the regex pattern
-  const pattern = /#code(.*?)#endcode/g;
+  const pattern = /#(.*?)##/gs;
   // Split the text into chunks using the regular expression
   const chunks = text.split(pattern);
   // console.log(chunks);

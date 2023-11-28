@@ -1,28 +1,30 @@
 /* eslint-disable react/prop-types */
 import CommentForm from "../components/CommentForm";
 
-export default function Comments({ comments }) {
+export default function Comments({ comments, answerId }) {
+  // console.log(answerId);
   return (
-    comments.length >= 0 && (
-      <div className="text-gray-500">
-        <div
-          className="text-sm shadow-sm p-1 my-1 shadow-green-400/20 pl-4 flex 
+    <div className="text-gray-500">
+      <div
+        className="text-sm shadow-sm p-1 my-1 shadow-green-400/20 pl-4 flex 
       items-center"
-        >
-          Comments
-        </div>
-        <div className="flex flex-col gap-1">
-          {comments.map((comment, i) => {
+      >
+        Comments
+      </div>
+      <div className="flex flex-col gap-1">
+        {comments &&
+          Object?.values(comments)?.map((comment, i) => {
             return (
-              <div key={i} className="bg-slate-600/20 p-1 mt-0.5">
-                <span className="text-green-600">{comment.author}: </span>
+              <div key={i} className="bg-slate-600/20 p-2 mt-0.5 flex gap-2">
+                <span className="text-green-600 flex">
+                  {comment.author.name}:
+                </span>
                 {comment.text}
               </div>
             );
           })}
-        </div>
-        <CommentForm />
       </div>
-    )
+      <CommentForm answerId={answerId} />
+    </div>
   );
 }

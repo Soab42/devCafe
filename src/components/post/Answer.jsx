@@ -1,11 +1,10 @@
-import React from "react";
-import { randomIcons } from "./postData";
-import { formatDate } from "../../utils/Date";
 import Comments from "./comments";
 import Author from "./Author";
 import AnswerForm from "../components/AnswerForm";
+import TextWithMarkup from "./TextWithMarkup";
 
 export default function Answer({ answer }) {
+  // Object.values(answer).map((ans) => console.log(ans));
   return (
     <div className="answer flex flex-col gap-1 text-slate-400">
       <div
@@ -14,20 +13,21 @@ export default function Answer({ answer }) {
       >
         Answer
       </div>
-      {answer.map((ans, i) => {
+      {Object?.keys(answer)?.map((key, i) => {
         return (
-          <div key={ans.time} className="flex flex-col gap-1 mt-1">
+          <div key={answer[key].time} className="flex flex-col gap-1 mt-1">
             <div className="font-bold text-xl">#{i + 1}</div>
-            <div>{ans.text}</div>
+            {/* <div>{ans.text}</div> */}
+            <TextWithMarkup text={answer[key].text} />
             <div className="h-2"></div>
-            <Comments comments={ans.comment} />
+            <Comments comments={answer[key].comment} answerId={key} />
             <div className="h-2"></div>
 
             <div>
               <Author
-                author={ans.author}
-                time={ans.time}
-                icon={ans.icon}
+                author={answer[key].author}
+                time={answer[key].time}
+                icon={answer[key].icon}
                 ans={true}
               />
             </div>

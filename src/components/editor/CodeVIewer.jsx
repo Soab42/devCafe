@@ -5,7 +5,9 @@ import { TiClipboard, TiTick } from "react-icons/ti";
 function CodeViewer({ text }) {
   // console.log(text);
   // Replace spaces with newline characters
-  const formattedCode = text.replace(/   /g, "\n");
+  const formattedCode = text.replace(/     /g, "\n");
+  // const formattedCode = text.replace(/ {3,}/g, "\n");
+
   return (
     <div className="opacity-80">
       <CodeView code={formattedCode} language="javascript" />
@@ -32,7 +34,7 @@ function CodeView({ code, language }) {
   return (
     <pre className="relative">
       <button
-        className="absolute px-1 right-5 text-slate-300 ring-1 gap-1 rounded-sm"
+        className="absolute px-1 right-5 text-slate-300 ring-1 gap-1 rounded-sm backdrop-blur-md"
         onClick={handleCopy}
       >
         {copy ? (

@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Search from "../components/components/Search";
 import SinglePostCard from "../components/post/SinglePostCard";
-import { postData } from "../data";
+
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { DB } from "../firebase";
+import { addAllData } from "../feature/data/allDataSlice";
 export default function AllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";
   // console.log(search);
   const [postData, setPostData] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     function getData() {
       const dataRef = ref(DB, "devcafe/data");
@@ -24,14 +26,17 @@ export default function AllPostList() {
             // Check if the user has a "post" node
             if (data[userId].post) {
               // Iterate through posts for the current user
-              Object.values(data[userId].post).forEach((postObject) => {
-                postsArray.push(postObject);
+              Object.keys(data[userId].post).forEach((postId) => {
+                const postObject = data[userId].post[postId];
+                // Add user ID and post ID to the postsArray
+                postsArray.push({ userId, postId, ...postObject });
               });
             }
           });
 
           // At this point, postsArray contains all posts from all user IDs
           setPostData(postsArray);
+          dispatch(addAllData(postsArray));
         } else {
           console.log("No data found");
         }

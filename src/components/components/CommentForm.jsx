@@ -8,6 +8,7 @@ export default function CommentForm({ answerId }) {
   const accessToken = useSelector((state) => state.users.accessToken);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const [openModalState, setOpenModalState] = useState(false);
 
   const { userId, postId } = useSelector((state) => state.singleData);
 
@@ -29,17 +30,25 @@ export default function CommentForm({ answerId }) {
       setShow(true);
     } else {
       dispatch(openModal());
+      setOpenModalState(true);
     }
   };
   return (
     <div className="p-2   ">
       {!show ? (
-        <span
-          className="cursor-pointer rounded-md w-32 bg-slate-400/20 p-2"
-          onClick={handleSelection}
-        >
-          Add a comment
-        </span>
+        <div className="flex gap-10">
+          <span
+            className="cursor-pointer rounded-md w-32 bg-slate-400/20 p-2"
+            onClick={handleSelection}
+          >
+            Add a comment
+          </span>
+          {openModalState && (
+            <div className="flex-center text-red-300">
+              Please login to comment
+            </div>
+          )}
+        </div>
       ) : (
         accessToken && (
           <form className={`flex-center gap-2`} onSubmit={handleSubmit}>

@@ -11,7 +11,7 @@ export default function Comments({ comments, answerId }) {
       >
         Comments
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 mb-2">
         {comments &&
           Object?.values(comments)?.map((comment, i) => {
             return (

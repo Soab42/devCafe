@@ -21,11 +21,11 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
           to see suggestions.
         </p>
       </div>
-      <div className="flex-center ring-1 rounded relative">
-        <span className="flex ml-1 gap-1">
+      <div className="flex-center ring-1 rounded relative min-w-fit">
+        <span className="flex ml-1 gap-1 min-w-fit">
           {tags.map((tag) => (
             <div
-              className="ring-1 p-1 px-2 rounded-sm bg-sky-400 capitalize"
+              className="ring-1 p-1 px-2 rounded-sm bg-sky-400 capitalize min-w-fit"
               key={tag}
               name="tags"
             >
@@ -61,6 +61,7 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
         <button
           className="px-4 p-1 rounded-md bg-green-600/40 opacity-80 text-slate-300/80 hover:opacity-100 duration-400 w-32"
           onClick={() => setInputSwitch(4)}
+          disabled={tags.length < 0}
         >
           Next
         </button>

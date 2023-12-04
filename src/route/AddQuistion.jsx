@@ -7,51 +7,53 @@ import Title from "../components/ask/Title";
 import TitleInput from "../components/ask/TitleInput";
 import TryInput from "../components/ask/Try";
 import TagsInput from "../components/ask/Tags";
-import ReviewInput from "../components/ask/ReviewQuistion";
+// import ReviewInput from "../components/ask/ReviewQuistion";
 import { useDispatch, useSelector } from "react-redux";
 import { addData } from "../database/addData";
 import { singleQuestionsRouteOn } from "../feature/route/routeSlice";
 import { addSingleData } from "../feature/data/singleDataSlice";
 import useLocalStorage from "../common/hooks/useLocalStorage";
 import { getUserInfo } from "../utils/selector/getUserInfo";
+import { openModal } from "../feature/loginModal/modalSlice";
 
 export default function AddQuestion() {
   const [inputSwitch, setInputSwitch] = useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector(getUserInfo);
-  const [singleDataValue, setSingleDataValue] = useLocalStorage(
-    "singleData",
-    undefined
-  );
+  const mood = useSelector((state) => state.mood.mood);
+  const [_, setSingleDataValue] = useLocalStorage("singleData", undefined);
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch(addLoading());
+    if (user) {
+      const form = e.target;
+      const inputs = form.getElementsByTagName("input");
+      const textareas = form.getElementsByTagName("textarea");
+      const tagDiv = form.querySelectorAll('[name="tags"]');
 
-    const form = e.target;
-    const inputs = form.getElementsByTagName("input");
-    const textareas = form.getElementsByTagName("textarea");
-    const tagDiv = form.querySelectorAll('[name="tags"]');
+      // Convert HTMLCollection to array and use reduce to create formData object
+      const formData = [...inputs, ...textareas].reduce((acc, input) => {
+        acc[input.name] = input.value;
+        return acc;
+      }, {});
 
-    // Convert HTMLCollection to array and use reduce to create formData object
-    const formData = [...inputs, ...textareas].reduce((acc, input) => {
-      acc[input.name] = input.value;
-      return acc;
-    }, {});
-
-    const tags = [...tagDiv].reduce((acc, tag) => {
-      acc.push(tag.innerHTML);
-      return acc;
-    }, []);
-    // console.log(formData);
-    const uploadData = addData({ ...formData, tags }, user);
-    if (uploadData) {
-      // console.log(uploadData);
-      setSingleDataValue(uploadData);
-      dispatch(addSingleData(uploadData));
-      dispatch(singleQuestionsRouteOn());
+      const tags = [...tagDiv].reduce((acc, tag) => {
+        acc.push(tag.innerHTML);
+        return acc;
+      }, []);
+      // console.log(formData);
+      const uploadData = addData({ ...formData, tags }, user);
+      if (uploadData) {
+        // console.log(uploadData);
+        setSingleDataValue(uploadData);
+        dispatch(addSingleData(uploadData));
+        dispatch(singleQuestionsRouteOn());
+      }
+    } else {
+      dispatch(openModal());
     }
   };
-  console.log(inputSwitch);
+  // console.log(inputSwitch);
   return (
     <div className="">
       <form
@@ -99,7 +101,7 @@ export default function AddQuestion() {
             />
           </div>
         </section>{" "}
-        <section className="flex flex-col gap-4">
+        {/* <section className="flex flex-col gap-4">
           {inputSwitch == 4 && <Title infoNo={inputSwitch} />}
           <div>
             <ReviewInput
@@ -107,16 +109,23 @@ export default function AddQuestion() {
               inputSwitch={inputSwitch}
             />
           </div>
+        </section> */}
+        <section className="flex  gap-4">
+          <button
+            className={`px-4 p-1 rounded-md bg-sky-600/40 opacity-80 text-slate-300/80 hover:opacity-100 duration-400 w-48 z-20 ${
+              inputSwitch !== 4 && "opacity-30 hover:opacity-30"
+            }`}
+            disabled={inputSwitch !== 4}
+            type="submit"
+          >
+            Post Your Question
+          </button>
+          {mood && (
+            <div className="text-red-400 flex-center">
+              Please log in to ask a question
+            </div>
+          )}
         </section>
-        <button
-          className={`px-4 p-1 rounded-md bg-sky-600/40 opacity-80 text-slate-300/80 hover:opacity-100 duration-400 w-48 z-20 ${
-            inputSwitch !== 5 && "opacity-30 hover:opacity-30"
-          }`}
-          disabled={inputSwitch !== 5}
-          type="submit"
-        >
-          Post Your Question
-        </button>
       </form>
     </div>
   );

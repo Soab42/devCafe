@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../components/components/Search";
 import SinglePostCard from "../components/post/SinglePostCard";
-
+import Pagination from "../components/utils/Pagination";
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { DB } from "../firebase";
@@ -10,6 +10,7 @@ export default function AllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";
   // console.log(search);
   const [postData, setPostData] = useState([]);
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
     function getData() {
@@ -45,14 +46,14 @@ export default function AllPostList() {
     getData();
   }, []);
   return (
-    <div className="h-[92vh]">
-      <h1 className="title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
+    <div className="">
+      <h1 className=" fixed title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
         All Questions
         <Search />
       </h1>
-
       <div className="flex flex-col gap-2 mt-2">
         {postData
+          .slice(0, page * 7)
           .filter(
             (post) =>
               post.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -63,6 +64,7 @@ export default function AllPostList() {
             <SinglePostCard data={data} key={data.title} />
           ))}
       </div>
+      <Pagination />
     </div>
   );
 }

@@ -106,3 +106,22 @@
     width: 65vw;
   }
 }
+
+.err-animation {
+  animation: nono 0.21s ease-in-out forwards;
+}
+
+@keyframes nono {
+  0% {
+    transform: translateX(0px);
+  }
+  33% {
+    transform: translateX(-10px);
+  }
+  66% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

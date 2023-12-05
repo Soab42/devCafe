@@ -4,7 +4,10 @@ import { openModal } from "../../feature/loginmodal/modalSlice";
 import { getSinglePost } from "../../database/getSinglePost";
 import { addSingleData } from "../../feature/data/singleDataSlice";
 import { addComment } from "../../database/addComment";
+import Error from "../utils/Error.jsx";
 export default function CommentForm({ answerId }) {
+  const [comment, setComment] = useState(null);
+  const [error, setError] = useState(null);
   const accessToken = useSelector((state) => state.users.accessToken);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -14,15 +17,25 @@ export default function CommentForm({ answerId }) {
 
   const user = useSelector((state) => state.users.user);
 
-  const inputRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addComment(user, userId, postId, inputRef.current.value, answerId);
 
-    const newData = await getSinglePost(userId, postId);
-    dispatch(addSingleData({ ...newData, userId: userId, postId: postId }));
-    // console.log("newData", newData);
-    inputRef.current.value = null;
+    setError(null);
+    try {
+      if (comment) {
+        addComment(user, userId, postId, comment, answerId);
+        const newData = await getSinglePost(userId, postId);
+        dispatch(addSingleData({ ...newData, userId: userId, postId: postId }));
+        setComment("");
+      } else {
+        setError("Input field cannot be empty!");
+      }
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+      setError("An error occurred while processing your request.");
+
+      // Handle and display the error to the user
+    }
   };
 
   const handleSelection = () => {
@@ -51,19 +64,29 @@ export default function CommentForm({ answerId }) {
         </div>
       ) : (
         accessToken && (
-          <form className={`flex-center gap-2`} onSubmit={handleSubmit}>
+          <form
+            className={`flex-center gap-2 relative`}
+            onSubmit={handleSubmit}
+          >
             <textarea
               name="comment"
               id="comment"
-              ref={inputRef}
+              onClick={() => setError(null)}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              // required
               className="w-[80%] p-1 bg-inherit ring-1"
             />
             <button
               type="submit"
+              disabled={comment == null}
               className="btn  h-8 w-20  ring-green-400 ring-1 shadow-md shadow-green-400/30 text-gray-400  duration-200 hover:text-black hover:bg-green-300/70"
             >
               Add
             </button>
+            <div className="absolute  right-1/2 ">
+              {error && <Error error={error} />}
+            </div>
           </form>
         )
       )}

@@ -2,7 +2,7 @@ import { ref, push, serverTimestamp } from "firebase/database";
 import { DB } from "../firebase";
 
 export const addComment = (user, userId, postId, data, answerId) => {
-  console.log(answerId);
+  // console.log(answerId);
   let dataRef;
   // Create a reference to the location where you want to push the data
   if (!answerId) {

@@ -19,5 +19,5 @@ export const addData = (data, user) => {
 
   //   console.log("Data pushed:", data);
   //   console.log("New post reference:", newPostRef.key);
-  return post;
+  return { ...post, time: Date.now() };
 };

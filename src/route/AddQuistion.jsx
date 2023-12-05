@@ -15,16 +15,18 @@ import { addSingleData } from "../feature/data/singleDataSlice";
 import useLocalStorage from "../common/hooks/useLocalStorage";
 import { getUserInfo } from "../utils/selector/getUserInfo";
 import { openModal } from "../feature/loginModal/modalSlice";
-
+import Error from "../components/utils/Error";
 export default function AddQuestion() {
   const [inputSwitch, setInputSwitch] = useState(0);
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const { user } = useSelector(getUserInfo);
-  const mood = useSelector((state) => state.mood.mood);
+  // const mood = useSelector((state) => state.mood.mood);
   const [_, setSingleDataValue] = useLocalStorage("singleData", undefined);
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch(addLoading());
+
     if (user) {
       const form = e.target;
       const inputs = form.getElementsByTagName("input");
@@ -51,6 +53,7 @@ export default function AddQuestion() {
       }
     } else {
       dispatch(openModal());
+      setError("Please login to Ask A Question");
     }
   };
   // console.log(inputSwitch);
@@ -100,7 +103,7 @@ export default function AddQuestion() {
               inputSwitch={inputSwitch}
             />
           </div>
-        </section>{" "}
+        </section>
         {/* <section className="flex flex-col gap-4">
           {inputSwitch == 4 && <Title infoNo={inputSwitch} />}
           <div>
@@ -120,11 +123,9 @@ export default function AddQuestion() {
           >
             Post Your Question
           </button>
-          {mood && (
-            <div className="text-red-400 flex-center">
-              Please log in to ask a question
-            </div>
-          )}
+          <div className="w-full">
+            <Error error={error} />
+          </div>
         </section>
       </form>
     </div>

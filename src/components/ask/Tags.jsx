@@ -7,6 +7,9 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
     setTags((prev) => [...prev, tag]);
     setTag("");
   };
+  const removeTag = (tagToRemove) => {
+    setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
+  };
 
   return (
     <div
@@ -25,9 +28,10 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
         <span className="flex ml-1 gap-1 min-w-fit">
           {tags.map((tag) => (
             <div
-              className="ring-1 p-1 px-2 rounded-sm bg-sky-400 capitalize min-w-fit"
+              className="ring-1 p-1 px-2 rounded-sm hover:bg-red-500 cursor-not-allowed bg-sky-400 capitalize min-w-fit"
               key={tag}
               name="tags"
+              onClick={() => removeTag(tag)}
             >
               {tag}
             </div>
@@ -47,7 +51,7 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
               .map((tag) => (
                 <span
                   key={tag}
-                  className="p-1 px-2 bg-lime-400 rounded-md"
+                  className="p-1 px-2 bg-lime-400 rounded-md cursor-pointer"
                   onClick={() => selectTag(tag)}
                 >
                   {tag}
@@ -61,7 +65,7 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
         <button
           className="px-4 p-1 rounded-md bg-green-600/40 opacity-80 text-slate-300/80 hover:opacity-100 duration-400 w-32"
           onClick={() => setInputSwitch(4)}
-          disabled={tags.length < 0}
+          disabled={tags.length <= 0}
         >
           Next
         </button>

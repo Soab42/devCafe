@@ -79,7 +79,6 @@ export default function CommentForm({ answerId }) {
             />
             <button
               type="submit"
-              disabled={comment == null}
               className="btn  h-8 w-20  ring-green-400 ring-1 shadow-md shadow-green-400/30 text-gray-400  duration-200 hover:text-black hover:bg-green-300/70"
             >
               Add

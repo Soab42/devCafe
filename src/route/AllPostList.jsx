@@ -11,6 +11,7 @@ export default function AllPostList() {
   // console.log(search);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
+  const perPage = 5;
   const dispatch = useDispatch();
   useEffect(() => {
     function getData() {
@@ -45,26 +46,43 @@ export default function AllPostList() {
     }
     getData();
   }, []);
+  const filterData = postData.filter(
+    (post) =>
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.tags.includes(search.toLowerCase())
+    // post.tags.includes("mongo")
+  );
   return (
     <div className="">
       <h1 className=" fixed title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
         All Questions
         <Search />
       </h1>
-      <div className="flex flex-col gap-2 mt-2">
-        {postData
-          .slice(0, page * 7)
-          .filter(
-            (post) =>
-              post.title.toLowerCase().includes(search.toLowerCase()) ||
-              post.tags.includes(search.toLowerCase())
-            // post.tags.includes("mongo")
-          )
-          .map((data) => (
+      {!search ? (
+        <>
+          <div className="flex flex-col gap-2 mt-2 h-[78vh] overflow-hidden">
+            {postData
+              .slice((page - 1) * perPage, page * perPage)
+              .map((data) => (
+                <SinglePostCard data={data} key={data.title} />
+              ))}
+          </div>
+          <Pagination
+            postsLength={postData.length}
+            totalPage={Math.ceil(postData.length / perPage)}
+            // totalPage={10}
+            pageNo={page}
+            setPage={setPage}
+            perPage={perPage}
+          />
+        </>
+      ) : (
+        <div className="flex flex-col gap-2 mt-2 h-[78vh]">
+          {filterData.map((data) => (
             <SinglePostCard data={data} key={data.title} />
           ))}
-      </div>
-      <Pagination />
+        </div>
+      )}
     </div>
   );
 }

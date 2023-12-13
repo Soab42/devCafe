@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Answer from "../components/post/Answer";
 import Author from "../components/post/Author";
 import Tag from "../components/post/Tag";
-import TextWithMarkup from "../components/post/TextWithMarkup";
+import TextWithMarkup from "../components/code/TextWithMarkup";
 import Title from "../components/post/Title";
 import Comments from "../components/post/comments";
 import useLocalStorage from "./../common/hooks/useLocalStorage";

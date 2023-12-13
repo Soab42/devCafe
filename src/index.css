@@ -125,3 +125,25 @@
     transform: translateX(0px);
   }
 }
+.info {
+  position: relative;
+  transition: all 1s ease-in-out forwards;
+}
+.info:hover {
+  filter: drop-shadow(1px 1px 4px rgba(242, 242, 46, 0.605));
+  /* box-shadow: 1px 1px 10px yellow; */
+}
+.info:hover::after {
+  content: "To add code click this button or follow the syntax of button.";
+  position: absolute;
+  top: -50px;
+  display: flex;
+  height: 40px;
+  width: 170px;
+  padding: 2px;
+  color: rgb(19, 69, 3);
+  border-radius: 8px 8px 8px 0px;
+  background: rgba(71, 244, 45, 0.374);
+  backdrop-filter: blur(10px);
+  transition: all 1s ease-in 1s;
+}

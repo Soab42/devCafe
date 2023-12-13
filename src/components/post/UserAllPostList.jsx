@@ -2,7 +2,7 @@ import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { DB } from "../../firebase";
-import Search from "../components/Search";
+import Search from "../form/Search";
 import SinglePostCard from "./SinglePostCard";
 export default function UserAllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";

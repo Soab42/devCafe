@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism-night-owl.css";
+import "prismjs/themes/prism-twilight.css";
 import { TiClipboard, TiTick } from "react-icons/ti";
 function CodeViewer({ text }) {
   // console.log(text);

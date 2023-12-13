@@ -21,7 +21,9 @@ export default function Search() {
   return (
     <div className="flex absolute right-10 text-xl text-sky-500 ">
       <button
-        onClick={() => setShow(!show)}
+        onClick={() => {
+          setShow(!show), document.querySelector("input").focus();
+        }}
         className={`${show && "text-yellow-600 duration-300 "}`}
       >
         <AiOutlineSearch />
@@ -30,8 +32,8 @@ export default function Search() {
       <input
         type="text"
         value={search}
-        placeholder="serach with tags"
-        className={`absolute right-7 -top-2 bg-black/40 backdrop-blur-3xl rounded-full text-xs font-thin mt-1 h-[1.7rem] outline-none placeholder-gray-300/20 ${
+        placeholder="serach with title or full tag "
+        className={`absolute right-7 -top-2 bg-black/40 backdrop-blur-3xl rounded-full text-xs font-thin mt-1 h-[1.7rem] outline-none placeholder-blue-300/60 ${
           show ? "show" : "hide"
         }`}
         style={{ paddingLeft: show && "10px" }}

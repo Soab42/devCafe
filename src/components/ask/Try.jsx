@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-
+import { AiFillInfoCircle } from "react-icons/ai";
 export default function Try({ setInputSwitch, inputSwitch }) {
   const inputRef = useRef();
   const handleAddText = () => {
@@ -40,11 +40,20 @@ export default function Try({ setInputSwitch, inputSwitch }) {
           >
             Next
           </button>
-          <div
-            className="flex-center gap-2 text-center hover:bg-purple-400/10 px-2 cursor-pointer"
-            onClick={handleAddText}
-          >
-            ##<code className="bg-slate-300/50 px-2 text-black">code</code>##
+          <div className="flex-center gap-2 text-center  px-2  text-slate-300/50">
+            <span className="info text-yellow-600 hover:text-yellow-300 ">
+              <AiFillInfoCircle size={"16px"} />
+            </span>
+            <div
+              className="flex-center gap-2 text-center hover:bg-purple-400/10 px-2 cursor-pointer text-slate-300/50"
+              onClick={handleAddText}
+            >
+              ##
+              <code className="bg-slate-300/50 px-2 text-black">
+                {"<code/>"}
+              </code>
+              ##
+            </div>
           </div>
         </div>
       )}

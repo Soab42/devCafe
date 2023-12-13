@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { allTags } from "../../tags";
+import { allTags } from "../../utils/tags";
 export default function TagsInput({ setInputSwitch, inputSwitch }) {
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");

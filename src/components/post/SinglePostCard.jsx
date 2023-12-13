@@ -28,13 +28,13 @@ export default function SinglePostCard({ data }) {
         <h3 className="title font-bold">
           <p>{data?.title}</p>
         </h3>
-        <div className="text-justify line-clamp-2 capitalize">
+        <div className="text-justify line-clamp-2 capitalize h-8">
           {data?.post.problem}
         </div>
         <div className="flex justify-between items-end">
           <div className="">
             <ul className="flex gap-2 p-1">
-              {data?.tags.map((tag) => (
+              {data?.tags.slice(0, 5).map((tag) => (
                 <li className="tag" key={tag}>
                   {tag}
                 </li>

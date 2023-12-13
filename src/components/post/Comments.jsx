@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import CommentForm from "../components/CommentForm";
+import CommentForm from "../form/CommentForm";
 
 export default function Comments({ comments, answerId }) {
   // console.log(answerId);

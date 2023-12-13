@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Content from "./Content";
+import Router from "./Router";
 import Layout from "./components/Layout";
 import useLocalStorage from "./common/hooks/useLocalStorage";
 
@@ -15,7 +15,7 @@ export default function DevCafeMain() {
 
   return (
     <Layout>
-      <Content />
+      <Router />
     </Layout>
   );
 }

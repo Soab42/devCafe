@@ -1,5 +1,3 @@
-import React from "react";
-import { randomIcons } from "./postData";
 import { formatDate } from "../../utils/Date";
 
 export default function Author({ author, time, ans }) {

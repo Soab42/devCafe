@@ -14,9 +14,9 @@ import {
 } from "../feature/route/routeSlice";
 import { userSignOut } from "../feature/user/authSlice";
 import { Auth } from "../firebase";
-import Icon from "./Icon";
+import Icon from "./utils/Icon";
 import LoginModal from "./LoginModal";
-import TerminalButton from "./components/TerminalButton";
+import TerminalButton from "./form/TerminalButton";
 import { addSingleData } from "../feature/data/singleDataSlice";
 export default function Navbar() {
   const user = useSelector((state) => state?.users);

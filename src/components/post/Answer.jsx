@@ -1,7 +1,7 @@
 import Comments from "./comments";
 import Author from "./Author";
-import AnswerForm from "../components/AnswerForm";
-import TextWithMarkup from "./TextWithMarkup";
+import AnswerForm from "../form/AnswerForm";
+import TextWithMarkup from "../code/TextWithMarkup";
 
 export default function Answer({ answer }) {
   // Object.values(answer).map((ans) => console.log(ans));

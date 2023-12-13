@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Search from "../components/components/Search";
+import Search from "../components/form/Search";
 import SinglePostCard from "../components/post/SinglePostCard";
 import Pagination from "../components/utils/Pagination";
 import { useEffect, useState } from "react";
@@ -60,7 +60,7 @@ export default function AllPostList() {
       </h1>
       {!search ? (
         <>
-          <div className="flex flex-col gap-2 mt-2 h-[78vh] overflow-hidden">
+          <div className="flex flex-col gap-2 my-2 h-[78vh] overflow-hidden">
             {postData
               .slice((page - 1) * perPage, page * perPage)
               .map((data) => (

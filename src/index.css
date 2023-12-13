@@ -147,3 +147,18 @@
   backdrop-filter: blur(10px);
   transition: all 1s ease-in 1s;
 }
+
+.userCardModal {
+  flex-direction: column;
+  /* padding: 0 0 0 0px; */
+  justify-content: center;
+  align-items: center;
+  /* height: 0px !important; */
+  position: absolute;
+  bottom: 20px;
+  backdrop-filter: blur(10px);
+  background: rgba(31, 133, 135, 0.37);
+  filter: box-shadow;
+  height: 180px;
+  border-radius: 10px;
+}

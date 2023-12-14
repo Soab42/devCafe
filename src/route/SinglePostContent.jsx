@@ -31,14 +31,14 @@ export default function SinglePostContent() {
 
   return (
     <div className="flex flex-col gap-2 relative pb-4 pt-1">
-      <div className="route flex gap-1">
+      {/* <div className="route flex gap-1">
         <button className="underline text-sky-600" onClick={setRoute}>
           home
         </button>
         /<button className="text-sky-600">post</button>
-      </div>
+      </div> */}
       {/* post title */}
-
+      <div className="h-7"></div>
       <Title title={text?.title} />
       <button
         className="btn hover:bg-blue-400/20 shadow-md hover:shadow-lg duration-300 text-slate-400 absolute right-5 shadow-blue-400/20 hover:text-black font-bold ring-1 w-24 h-8"

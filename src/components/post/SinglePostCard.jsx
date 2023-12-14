@@ -26,15 +26,15 @@ export default function SinglePostCard({ data }) {
     >
       <div className="flex flex-col gap-2 justify-center">
         <h3 className="title font-bold">
-          <p>{data?.title}</p>
+          <p className="capitalize">{data?.title}</p>
         </h3>
-        <div className="text-justify line-clamp-2 capitalize h-8">
+        <div className="text-justify line-clamp-2 capitalize">
           {data?.post.problem}
         </div>
-        <div className="flex justify-between items-end">
+        <div className="flex flex-col gap-2">
           <div className="">
             <ul className="flex gap-2 p-1">
-              {data?.tags.slice(0, 5).map((tag) => (
+              {data?.tags.slice(0, 4).map((tag) => (
                 <li className="tag" key={tag}>
                   {tag}
                 </li>
@@ -42,7 +42,7 @@ export default function SinglePostCard({ data }) {
             </ul>
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex gap-1 justify-end">
             <div className="gravatar-wrapper-16">
               <img
                 src={data?.author.photoURL}

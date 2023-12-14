@@ -13,7 +13,7 @@
     @apply text-xl font-semibold text-sky-600/90;
   }
   .tag {
-    @apply bg-[#936648] px-2 px-1 text-center text-black/70 font-semibold  rounded-sm hover:bg-blue-700/80 hover:text-black/50 duration-300 min-w-[1.5rem] text-[10px] capitalize;
+    @apply bg-[#936648] px-1 py-0.5 min-w-fit text-center text-black/70 font-semibold  rounded-sm hover:bg-blue-700/80 hover:text-black/50 duration-300  text-[11px] capitalize;
   }
   .card {
     @apply shadow-md text-slate-500 px-2;
@@ -155,10 +155,10 @@
   align-items: center;
   /* height: 0px !important; */
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   backdrop-filter: blur(10px);
   background: rgba(31, 133, 135, 0.37);
   filter: box-shadow;
-  height: 180px;
-  border-radius: 10px;
+  height: 150px;
+  /* border-radius: 100px; */
 }

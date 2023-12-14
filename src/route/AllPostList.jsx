@@ -14,7 +14,7 @@ export default function AllPostList() {
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const perPage = 5;
+  const perPage = 6;
   const dispatch = useDispatch();
   useEffect(() => {
     function getData() {
@@ -65,24 +65,25 @@ export default function AllPostList() {
   } else if (!loading && !search) {
     content = (
       <>
-        <div className="flex flex-col gap-2 my-2 h-[78vh] overflow-hidden">
+        <div className="flex flex-col gap-2 my-2 overflow-scroll">
           {postData.slice((page - 1) * perPage, page * perPage).map((data) => (
             <SinglePostCard data={data} key={data.title} />
           ))}
+
+          <Pagination
+            postsLength={postData.length}
+            totalPage={Math.ceil(postData.length / perPage)}
+            // totalPage={10}
+            pageNo={page}
+            setPage={setPage}
+            perPage={perPage}
+          />
         </div>
-        <Pagination
-          postsLength={postData.length}
-          totalPage={Math.ceil(postData.length / perPage)}
-          // totalPage={10}
-          pageNo={page}
-          setPage={setPage}
-          perPage={perPage}
-        />
       </>
     );
   } else if (!loading && search) {
     content = (
-      <div className="flex flex-col gap-2 mt-2 h-[78vh]">
+      <div className="grid gap-2 mt-2">
         {filterData.map((data) => (
           <SinglePostCard data={data} key={data.title} />
         ))}
@@ -92,7 +93,7 @@ export default function AllPostList() {
 
   return (
     <div className="">
-      <h1 className=" fixed title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
+      <h1 className=" title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
         All Questions
         <Search />
       </h1>

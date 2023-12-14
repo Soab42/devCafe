@@ -3,6 +3,7 @@ import CommentForm from "../form/CommentForm";
 
 export default function Comments({ comments, answerId }) {
   // console.log(answerId);
+
   return (
     <div className="text-gray-500">
       <div
@@ -19,6 +20,7 @@ export default function Comments({ comments, answerId }) {
                 <span className="text-green-600 flex">
                   {comment.author.name}:
                 </span>
+
                 {comment.text}
               </div>
             );

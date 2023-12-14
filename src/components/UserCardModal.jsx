@@ -5,7 +5,7 @@ export default function UserModal({ user }) {
     <div className="userCardModal flex">
       <img src={user?.photoURL} alt={user.name} className="w-36 object-fill" />
 
-      <div className="text-green-200 text-sm mt-1">{user?.name}</div>
+      <div className="text-green-200 text-[12px] mt-1">{user?.name}</div>
       <div className="text-blue-gray-500 bg-black/60 font-thin py-0.5 w-full text-center">
         {user?.email}
       </div>

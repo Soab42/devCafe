@@ -4,7 +4,7 @@ import { DB } from "../firebase";
 export const addData = (data, user) => {
   // Create a reference to the location where you want to push the data
   const dataRef = ref(DB, "devcafe/data/" + user.id + "/post");
-  console.log(data);
+  // console.log(data);
   const post = {
     tags: data.tags,
     title: data.title,

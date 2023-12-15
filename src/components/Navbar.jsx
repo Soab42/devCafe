@@ -49,8 +49,8 @@ export default function Navbar() {
     if (singleDataValue) dispatch(addSingleData(singleDataValue));
     if (routeValue) dispatch(addRoute(routeValue));
   }, []);
-  console.log(singleDataValue);
-  console.log(routeValue);
+  // console.log(singleDataValue);
+  // console.log(routeValue);
   const handleRouteChange = (routing) => {
     setShow(false);
     if (routing === "all") {
@@ -73,7 +73,7 @@ export default function Navbar() {
       dispatch(allQuestionsRouteOn());
     }
   };
-  console.log("rendering Navbar");
+  // console.log("rendering Navbar");
   return (
     <div className="flex-center font-bold text-xl h-10 title  text-sky-600 w-full bg-slate-700/10 shadow-sm shadow-sky-600/30">
       <div className="flex justify-between items-center md:w-[60%] w-[90%]">

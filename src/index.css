@@ -202,7 +202,6 @@
 .animate-in {
   width: 0;
   transform: translateX(-10px);
-  overflow: hidden;
   animation: fadeIn 1s forwards;
 }
 

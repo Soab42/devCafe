@@ -47,7 +47,7 @@ export default function SinglePostContent() {
         Ask Question
       </button>
       {/* tags */}
-      <div className="flex gap-2 p-1">
+      <div className="flex gap-2 p-1 w-full flex-wrap">
         {text?.tags?.map((tag) => (
           <Tag tag={tag} key={tag} />
         ))}

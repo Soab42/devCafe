@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
-import { PiPowerThin } from "react-icons/pi";
+import { PiAirTrafficControl, PiPowerThin, PiTrademark } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import useLocalStorage from "../common/hooks/useLocalStorage";
 import { closeModal, openModal } from "../feature/loginmodal/modalSlice";
@@ -18,7 +18,10 @@ import Icon from "./utils/Icon";
 import LoginModal from "./LoginModal";
 import TerminalButton from "./form/TerminalButton";
 import { addSingleData } from "../feature/data/singleDataSlice";
+import { SiBurgerking, SiCoffeescript, SiFlask } from "react-icons/si";
+import BurgerMenu from "./utils/BurgerMenu";
 export default function Navbar() {
+  const [show, setShow] = useState("false");
   const user = useSelector((state) => state?.users);
   const mood = useSelector((state) => state?.mood?.mood);
   const route = useSelector((state) => state?.route);
@@ -71,19 +74,28 @@ export default function Navbar() {
   return (
     <div className="flex-center font-bold text-xl h-10 title  text-sky-600 w-full bg-slate-700/10 shadow-sm shadow-sky-600/30">
       <div className="flex justify-between items-center md:w-[60%] w-[90%]">
-        {/* icon  */}
-        <Icon />
-        {/* navigation buttons */}
-        <div className="flex-center gap-2  font-thin text-sm">
+        {/* Burger menu */}
+        <div className="w-fit xl:hidden" onClick={() => setShow(!show)}>
+          <BurgerMenu show={show} />
+        </div>
+        <div
+          className={`gap-1 ${
+            show ? "w-1/2" : "w-0 opacity-0"
+          } font-thin text-sm flex flex-col absolute left-0 top-5 z-50 items-start mt-5 xl:hidden bg-black/20 backdrop-blur-md h-screen duration-700 p-4`}
+        >
           <button
-            className={`${route === "all" && "text-[#936648]"} navLink`}
+            className={`${
+              route === "all" && "text-[#936648] bg-inherit"
+            } navLinkSm`}
             onClick={() => handleRouteChange("all")}
           >
             Home
           </button>
           {user.user && (
             <button
-              className={`${route === "profile" && "text-[#936648]"} navLink`}
+              className={`${
+                route === "profile" && "text-[#936648] bg-inherit"
+              } navLinkSm`}
               onClick={() => handleRouteChange("profile")}
             >
               Profile
@@ -91,14 +103,60 @@ export default function Navbar() {
           )}
           {user.user && (
             <button
-              className={`${route === "add" && "text-[#936648]"} navLink`}
+              className={`${
+                route === "add" && "text-[#936648] bg-inherit"
+              } navLinkSm`}
               onClick={() => handleRouteChange("add")}
             >
               Ask Question
             </button>
           )}
           <button
-            className={`${route === "about" && "text-[#936648]"} navLink`}
+            className={`${
+              route === "about" && "text-[#936648] bg-inherit"
+            } navLinkSm`}
+            onClick={() => handleRouteChange("about")}
+          >
+            About
+          </button>
+        </div>
+
+        {/* icon  */}
+        <Icon />
+        {/* navigation buttons */}
+        <div className="hidden gap-2  font-thin text-sm xl:flex">
+          <button
+            className={`${
+              route === "all" && "text-[#936648] bg-inherit"
+            } navLink`}
+            onClick={() => handleRouteChange("all")}
+          >
+            Home
+          </button>
+          {user.user && (
+            <button
+              className={`${
+                route === "profile" && "text-[#936648] bg-inherit"
+              } navLink`}
+              onClick={() => handleRouteChange("profile")}
+            >
+              Profile
+            </button>
+          )}
+          {user.user && (
+            <button
+              className={`${
+                route === "add" && "text-[#936648] bg-inherit"
+              } navLink`}
+              onClick={() => handleRouteChange("add")}
+            >
+              Ask Question
+            </button>
+          )}
+          <button
+            className={`${
+              route === "about" && "text-[#936648] bg-inherit"
+            } navLink`}
             onClick={() => handleRouteChange("about")}
           >
             About
@@ -108,8 +166,8 @@ export default function Navbar() {
 
         {/* user authentication section */}
         {user?.user ? (
-          <div className="text-sm font-thin great-vibes flex gap-1">
-            {user?.user?.name}
+          <div className="text-sm font-thin great-vibes flex gap-1 ">
+            <div className="hidden xl:flex">{user?.user?.name}</div>
             <button
               className="text-xs flex-center hover:text-red-500 duration-300 "
               onClick={handleSignOut}

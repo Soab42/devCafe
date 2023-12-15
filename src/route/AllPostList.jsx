@@ -14,7 +14,7 @@ export default function AllPostList() {
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const perPage = 6;
+  const perPage = 10;
   const dispatch = useDispatch();
   useEffect(() => {
     function getData() {

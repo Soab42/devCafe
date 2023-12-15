@@ -5,7 +5,7 @@ import Author from "../components/post/Author";
 import Tag from "../components/post/Tag";
 import TextWithMarkup from "../components/code/TextWithMarkup";
 import Title from "../components/post/Title";
-import Comments from "../components/post/comments";
+import Comments from "../components/post/Comments";
 import useLocalStorage from "./../common/hooks/useLocalStorage";
 import {
   allQuestionsRouteOn,

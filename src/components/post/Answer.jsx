@@ -1,4 +1,4 @@
-import Comments from "./comments";
+import Comments from "./Comments";
 import Author from "./Author";
 import AnswerForm from "../form/AnswerForm";
 import TextWithMarkup from "../code/TextWithMarkup";

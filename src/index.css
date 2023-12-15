@@ -199,3 +199,20 @@
 .reflect {
   transform: scaleX(-1);
 }
+.animate-in {
+  width: 0;
+  transform: translateX(-10px);
+  overflow: hidden;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50%,
+  100% {
+    width: 100%;
+    transform: translateX(0px);
+  }
+}

@@ -9,7 +9,7 @@ export default function Pagination({
   totalPage,
   perPage,
 }) {
-  console.log(postsLength);
+  console.log("rendering Pagination");
   const handlePagination = useCallback(
     (page) => {
       setPage(page);

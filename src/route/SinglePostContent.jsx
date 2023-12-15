@@ -11,34 +11,63 @@ import {
   allQuestionsRouteOn,
   addQuestionRouteOn,
 } from "../feature/route/routeSlice";
-import { useEffect } from "react";
+import { GrMoreVertical } from "react-icons/gr";
+import { IoMdOptions } from "react-icons/io";
+import { SiCkeditor4, SiStopstalk } from "react-icons/si";
+import { MdClose, MdOutlineDeleteSweep, MdStop } from "react-icons/md";
+import { useState } from "react";
+// import { useEffect } from "react";
 
 // const day = require("dayjs");
 export default function SinglePostContent() {
-  const [singleDataValue, setSingleDataValue] = useLocalStorage(
-    "singleData",
-    undefined
-  );
   const dispatch = useDispatch();
-  const setRoute = () => dispatch(allQuestionsRouteOn());
+  const [show, setShow] = useState(false);
   const text = useSelector((state) => state.singleData);
-  // console.log(text);
-  useEffect(() => {
-    if (!singleDataValue) {
-      dispatch(allQuestionsRouteOn());
-    }
-  }, []);
+  const user = useSelector((state) => state.users.user);
+  const [_, setRoute] = useLocalStorage("route", undefined);
 
+  function isEmptyObject(obj) {
+    return Object.keys(obj).length === 0;
+  }
+  if (isEmptyObject(text)) {
+    // console.log("not have text");
+    dispatch(allQuestionsRouteOn());
+    setRoute("all");
+  }
+  // console.log("text", text);
   return (
     <div className="flex flex-col gap-2 relative pb-4 pt-1">
-      {/* <div className="route flex gap-1">
-        <button className="underline text-sky-600" onClick={setRoute}>
-          home
-        </button>
-        /<button className="text-sky-600">post</button>
-      </div> */}
       {/* post title */}
-      <div className="h-7"></div>
+      <div className={`h-7 text-yellow-600 flex text-xl relative`}>
+        {user.name === text.author.name && (
+          <button
+            className={`${show && "rotate-90"} duration-300`}
+            onClick={() => setShow(!show)}
+          >
+            <IoMdOptions />
+          </button>
+        )}
+      </div>
+      <div
+        id={"option"}
+        className={`absolute animate-in gap-2 left-8 top-2 text-xs ${
+          show ? "flex" : "hidden"
+        }`}
+      >
+        <div className="h-5 flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 bg-green-300 px-2 cursor-pointer">
+          <SiCkeditor4 />
+          Edit
+        </div>
+        <div className="flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 px-1 bg-slate-400 cursor-pointer">
+          <SiStopstalk />
+          Close
+        </div>
+        <div className="flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 px-1 bg-red-500 cursor-pointer">
+          <MdOutlineDeleteSweep />
+          Delete
+        </div>
+      </div>
+
       <Title title={text?.title} />
       <button
         className="btn hover:bg-blue-400/20 shadow-md hover:shadow-lg duration-300 text-slate-400 absolute right-5 shadow-blue-400/20 hover:text-black font-bold ring-1 w-24 h-8"

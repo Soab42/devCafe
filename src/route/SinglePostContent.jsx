@@ -39,7 +39,7 @@ export default function SinglePostContent() {
     <div className="flex flex-col gap-2 relative pb-4 pt-1">
       {/* post title */}
       <div className={`h-7 text-yellow-600 flex text-xl relative`}>
-        {user.name === text.author.name && (
+        {user?.name === text?.author?.name && (
           <button
             className={`${show && "rotate-90"} duration-300`}
             onClick={() => setShow(!show)}

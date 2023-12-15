@@ -14,7 +14,7 @@ import { singleQuestionsRouteOn } from "../feature/route/routeSlice";
 import { addSingleData } from "../feature/data/singleDataSlice";
 import useLocalStorage from "../common/hooks/useLocalStorage";
 import { getUserInfo } from "../utils/selector/getUserInfo";
-import { openModal } from "../feature/loginModal/modalSlice";
+import { openModal } from "../feature/loginmodal/modalSlice";
 import Error from "../components/utils/Error";
 export default function AddQuestion() {
   const [inputSwitch, setInputSwitch] = useState(0);

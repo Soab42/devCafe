@@ -11,10 +11,10 @@ import {
   allQuestionsRouteOn,
   addQuestionRouteOn,
 } from "../feature/route/routeSlice";
-import { GrMoreVertical } from "react-icons/gr";
+
 import { IoMdOptions } from "react-icons/io";
 import { SiCkeditor4, SiStopstalk } from "react-icons/si";
-import { MdClose, MdOutlineDeleteSweep, MdStop } from "react-icons/md";
+import { MdOutlineDeleteSweep } from "react-icons/md";
 import { useState } from "react";
 // import { useEffect } from "react";
 
@@ -24,7 +24,7 @@ export default function SinglePostContent() {
   const [show, setShow] = useState(false);
   const text = useSelector((state) => state.singleData);
   const user = useSelector((state) => state.users.user);
-  const [_, setRoute] = useLocalStorage("route", undefined);
+  const [route, setRoute] = useLocalStorage("route", undefined);
 
   function isEmptyObject(obj) {
     return Object.keys(obj).length === 0;

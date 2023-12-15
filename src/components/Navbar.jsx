@@ -21,7 +21,7 @@ import { addSingleData } from "../feature/data/singleDataSlice";
 import { SiBurgerking, SiCoffeescript, SiFlask } from "react-icons/si";
 import BurgerMenu from "./utils/BurgerMenu";
 export default function Navbar() {
-  const [show, setShow] = useState("false");
+  const [show, setShow] = useState(false);
   const user = useSelector((state) => state?.users);
   const mood = useSelector((state) => state?.mood?.mood);
   const route = useSelector((state) => state?.route);
@@ -78,23 +78,26 @@ export default function Navbar() {
         <div className="w-fit xl:hidden" onClick={() => setShow(!show)}>
           <BurgerMenu show={show} />
         </div>
+
         <div
           className={`gap-1 ${
-            show ? "w-1/2" : "w-0 opacity-0"
-          } font-thin text-sm flex flex-col absolute left-0 top-5 z-50 items-start mt-5 xl:hidden bg-black/20 backdrop-blur-md h-screen duration-700 p-4`}
+            show ? "w-1/2" : "w-0 -translate-x-10"
+          } font-thin text-sm flex flex-col absolute left-0 top-5 z-50 items-start mt-5 xl:hidden bg-black/20 backdrop-blur-md h-screen duration-700 p-4 overflow-hidden`}
         >
-          <button
+          <div
             className={`${
-              route === "all" && "text-[#936648] bg-inherit"
+              (route === "all" && "text-[#936648] bg-inherit",
+              !show && "hidden")
             } navLinkSm`}
             onClick={() => handleRouteChange("all")}
           >
             Home
-          </button>
+          </div>
           {user.user && (
             <button
               className={`${
-                route === "profile" && "text-[#936648] bg-inherit"
+                (route === "profile" && "text-[#936648] bg-inherit",
+                !show && "hidden")
               } navLinkSm`}
               onClick={() => handleRouteChange("profile")}
             >
@@ -104,7 +107,8 @@ export default function Navbar() {
           {user.user && (
             <button
               className={`${
-                route === "add" && "text-[#936648] bg-inherit"
+                (route === "add" && "text-[#936648] bg-inherit",
+                !show && "hidden")
               } navLinkSm`}
               onClick={() => handleRouteChange("add")}
             >
@@ -113,7 +117,8 @@ export default function Navbar() {
           )}
           <button
             className={`${
-              route === "about" && "text-[#936648] bg-inherit"
+              (route === "about" && "text-[#936648] bg-inherit",
+              !show && "hidden")
             } navLinkSm`}
             onClick={() => handleRouteChange("about")}
           >
@@ -127,7 +132,8 @@ export default function Navbar() {
         <div className="hidden gap-2  font-thin text-sm xl:flex">
           <button
             className={`${
-              route === "all" && "text-[#936648] bg-inherit"
+              (route === "all" && "text-[#936648] bg-inherit",
+              !show && "hidden")
             } navLink`}
             onClick={() => handleRouteChange("all")}
           >
@@ -136,7 +142,8 @@ export default function Navbar() {
           {user.user && (
             <button
               className={`${
-                route === "profile" && "text-[#936648] bg-inherit"
+                (route === "profile" && "text-[#936648] bg-inherit",
+                !show && "hidden")
               } navLink`}
               onClick={() => handleRouteChange("profile")}
             >
@@ -146,7 +153,8 @@ export default function Navbar() {
           {user.user && (
             <button
               className={`${
-                route === "add" && "text-[#936648] bg-inherit"
+                (route === "add" && "text-[#936648] bg-inherit",
+                !show && "hidden")
               } navLink`}
               onClick={() => handleRouteChange("add")}
             >
@@ -155,7 +163,8 @@ export default function Navbar() {
           )}
           <button
             className={`${
-              route === "about" && "text-[#936648] bg-inherit"
+              (route === "about" && "text-[#936648] bg-inherit",
+              !show && "hidden")
             } navLink`}
             onClick={() => handleRouteChange("about")}
           >

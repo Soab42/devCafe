@@ -60,10 +60,11 @@ export default function SinglePostContent() {
   // console.log("text", text);
   const updatePostStatus = () => {
     closePost(user, text.postId, text);
-    dispatch(addStateChange(!stateChange));
+    dispatch(addStateChange());
   };
   const handleDeletePost = () => {
     deletePost();
+    dispatch(addStateChange());
   };
   return (
     <div className="flex flex-col gap-2 relative pb-4 pt-1">

@@ -5,7 +5,7 @@ const stateChangeSlice = createSlice({
   name: "stateChange",
   initialState,
   reducers: {
-    addStateChange: (state, action) => action.payload,
+    addStateChange: (state) => !state,
   },
 });
 export const { addStateChange } = stateChangeSlice.actions;

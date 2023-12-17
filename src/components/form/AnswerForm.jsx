@@ -13,8 +13,6 @@ export default function AnswerForm() {
   const { user } = useSelector(getUserInfo);
   // const user = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
-  // console.log(singleContent);
-  const stateChange = useSelector((state) => state.stateChange);
 
   const inputRef = useRef();
   const handleSubmit = async (e) => {
@@ -27,7 +25,7 @@ export default function AnswerForm() {
         inputRef.current.value
       );
 
-      dispatch(addStateChange(!stateChange));
+      dispatch(addStateChange());
 
       inputRef.current.value = null;
     } else {

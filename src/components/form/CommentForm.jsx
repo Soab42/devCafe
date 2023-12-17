@@ -13,7 +13,6 @@ export default function CommentForm({ answerId }) {
   const [openModalState, setOpenModalState] = useState(false);
 
   const singleData = useSelector((state) => state.singleData);
-  const stateChange = useSelector((state) => state.stateChange);
 
   const user = useSelector((state) => state.users.user);
 
@@ -31,7 +30,7 @@ export default function CommentForm({ answerId }) {
           answerId
         );
 
-        dispatch(addStateChange(!stateChange));
+        dispatch(addStateChange());
         setComment("");
       } else {
         setError("Input field cannot be empty!");

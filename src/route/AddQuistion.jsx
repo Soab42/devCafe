@@ -23,7 +23,7 @@ export default function AddQuestion() {
   const { user } = useSelector(getUserInfo);
   // const mood = useSelector((state) => state.mood.mood);
   const [_, setSingleDataValue] = useLocalStorage("singleData", undefined);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // dispatch(addLoading());
 
@@ -44,7 +44,8 @@ export default function AddQuestion() {
         return acc;
       }, []);
       // console.log(formData);
-      const uploadData = addData({ ...formData, tags }, user);
+      const uploadData = await addData({ ...formData, tags }, user);
+      console.log(uploadData);
       if (uploadData) {
         // console.log(uploadData);
         setSingleDataValue(uploadData);

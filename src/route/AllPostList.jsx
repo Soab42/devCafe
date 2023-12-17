@@ -9,6 +9,7 @@ import { getAllPosts } from "../database/getAllPosts";
 
 export default function AllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";
+  const user = useSelector((state) => state.users.user);
   // console.log(search);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
@@ -40,8 +41,18 @@ export default function AllPostList() {
   let content;
 
   if (loading) {
-    content = "loading..";
-  } else if (!loading && !search) {
+    content = <div className="flex-center h-[90vh] text-3xl flex-col"></div>;
+  } else if (!loading && !search && postData?.length == 0) {
+    content = (
+      <div className="flex-center h-[90vh] text-3xl flex-col">
+        <p className="text-sky-600 capitalize">No Data Available!</p>
+        <span className="text-lg mt-4 text-slate-600">
+          If You Have Any Question, Please! {!user?.id && "Login And"} Ask A
+          Question.
+        </span>
+      </div>
+    );
+  } else if (!loading && !search && postData?.length > 0) {
     content = (
       <>
         <div className="flex flex-col gap-2 my-2 overflow-scroll" key={"main"}>

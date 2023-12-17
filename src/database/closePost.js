@@ -1,9 +1,12 @@
 import { ref, serverTimestamp, update } from "firebase/database";
 import { DB } from "../firebase";
 
-export const closePost = async (user, postId, originalData) => {
+export const closePost = async (originalData) => {
   // Create a reference to the location where you want to update the data
-  const dataRef = ref(DB, "devcafe/data/" + user.id + "/post/" + postId);
+  const dataRef = ref(
+    DB,
+    "devcafe/data/" + originalData?.userId + "/post/" + originalData?.postId
+  );
   const updateData = {
     closed: !originalData?.closed,
     closingTime: serverTimestamp(),

@@ -21,6 +21,8 @@ export default function Content() {
     content = <About />;
   } else if (route === "edit") {
     content = <EditQuestion />;
+  } else {
+    content = <AllPostList />;
   }
   return content;
 }

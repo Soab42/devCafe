@@ -13,7 +13,10 @@ const modalSlice = createSlice({
     closeModal: (state) => {
       return { ...state, mood: false };
     },
+    confirmModal: (state) => {
+      return { ...state, mood: "confirm" };
+    },
   },
 });
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, confirmModal } = modalSlice.actions;
 export default modalSlice.reducer;

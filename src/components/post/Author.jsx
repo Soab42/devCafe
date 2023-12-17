@@ -14,7 +14,7 @@ export default function Author({ author, time, ans }) {
   return (
     <div className="flex justify-end pr-10  gap-2 backdrop-blur-lg">
       <div className="w-10 h-10 bg-black flex-center">
-        <img src={author.photoURL} alt={author.name} />
+        <img src={author?.photoURL} alt={author?.name} />
       </div>
       <div>
         <div
@@ -22,7 +22,7 @@ export default function Author({ author, time, ans }) {
           onMouseEnter={activeModal}
           onMouseLeave={deactiveModal}
         >
-          {author.name}
+          {author?.name}
 
           {show && <UserModal user={author} />}
         </div>

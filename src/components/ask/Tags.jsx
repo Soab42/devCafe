@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { allTags } from "../../utils/tags";
-export default function TagsInput({ setInputSwitch, inputSwitch }) {
-  const [tags, setTags] = useState([]);
+export default function TagsInput({
+  setInputSwitch,
+  inputSwitch,
+  initialValue,
+}) {
+  const [tags, setTags] = useState([...(initialValue || undefined)]);
   const [tag, setTag] = useState("");
   const selectTag = (tag) => {
     setTags((prev) => [...prev, tag]);
@@ -13,7 +17,7 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
 
   return (
     <div
-      className={`backdrop-blur-xl shadow-xl p-2 flex flex-col gap-2 rounded-sm ${
+      className={`backdrop-blur-xl  shadow-xl p-2 flex flex-col gap-2 rounded-sm ${
         inputSwitch < 3 && "opacity-30"
       }`}
     >
@@ -24,8 +28,8 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
           to see suggestions.
         </p>
       </div>
-      <div className="flex-center ring-1 rounded relative min-w-fit">
-        <span className="flex ml-1 gap-1 min-w-fit">
+      <div className="flex py-1 ring-1 rounded relative z-50 flex-wrap">
+        <span className="flex ml-1 gap-1 w-fit flex-wrap  px-2">
           {tags.map((tag) => (
             <div
               className="ring-1 p-1 px-2 rounded-sm hover:bg-red-500 cursor-not-allowed bg-sky-400 capitalize min-w-fit"
@@ -42,10 +46,10 @@ export default function TagsInput({ setInputSwitch, inputSwitch }) {
           onChange={(e) => setTag(e.target.value)}
           value={tag}
           disabled={inputSwitch < 3}
-          className="w-full h-8 bg-inherit rounded-md outline-none text-slate-300/70 pl-4 "
+          className="h-8 grow  rounded-md outline-none text-slate-300/70 pl-4 bg-inherit "
         />
         {tag && (
-          <div className="absolute p-2 max-h-24 rounded-md overflow-scroll bg-[#0f5443] w-full top-10 z-50 flex flex-wrap gap-1">
+          <div className="p-2 max-h-24 rounded-md overflow-scroll bg-[#0f5443] w-full top-10  flex flex-wrap gap-1">
             {allTags
               .filter((ptag) => ptag.includes(tag))
               .map((tag) => (

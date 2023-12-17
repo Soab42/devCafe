@@ -10,31 +10,49 @@ import useLocalStorage from "./../common/hooks/useLocalStorage";
 import {
   allQuestionsRouteOn,
   addQuestionRouteOn,
+  editRouteOn,
 } from "../feature/route/routeSlice";
 
 import { IoMdOptions } from "react-icons/io";
 import { SiCkeditor4, SiStopstalk } from "react-icons/si";
 import { MdOutlineDeleteSweep } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useEffect } from "react";
-
+import { closePost } from "../database/closePost";
+import { addSingleData } from "../feature/data/singleDataSlice";
+import { getSinglePost } from "../database/getSinglePost";
+import { addLoading, removeLoading } from "../feature/loading/loadingSlice";
 // const day = require("dayjs");
 export default function SinglePostContent() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const text = useSelector((state) => state.singleData);
+  const postRef = useSelector((state) => state.singleData);
   const user = useSelector((state) => state.users.user);
+  const loading = useSelector((state) => state.loading);
   const [route, setRoute] = useLocalStorage("route", undefined);
+  const [text, setText] = useState([]);
 
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0;
-  }
-  if (isEmptyObject(text)) {
+  useEffect(() => {
+    async function getData() {
+      const data = await getSinglePost(postRef?.userId, postRef.postId);
+      setText(data);
+      console.log(data);
+    }
+    getData();
+  }, [loading]);
+
+  if (Object.keys(route).length === 0) {
     // console.log("not have text");
     dispatch(allQuestionsRouteOn());
     setRoute("all");
   }
   // console.log("text", text);
+  const updateSingleData = async () => {
+    dispatch(addLoading());
+    await closePost(user, text.postId, text);
+    dispatch(removeLoading());
+  };
+
   return (
     <div className="flex flex-col gap-2 relative pb-4 pt-1">
       {/* post title */}
@@ -54,14 +72,30 @@ export default function SinglePostContent() {
           show ? "flex" : "hidden"
         }`}
       >
-        <div className="h-5 flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 bg-green-300 px-2 cursor-pointer">
+        <div
+          className="h-5 flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 bg-green-300 px-2 cursor-pointer"
+          onClick={() => dispatch(editRouteOn())}
+        >
           <SiCkeditor4 />
           Edit
         </div>
-        <div className="flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 px-1 bg-slate-400 cursor-pointer">
-          <SiStopstalk />
-          Close
-        </div>
+        {!text?.closed ? (
+          <div
+            className="flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 px-1 bg-slate-400 cursor-pointer"
+            onClick={updateSingleData}
+          >
+            <SiStopstalk />
+            Close
+          </div>
+        ) : (
+          <div
+            className="flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 px-1 bg-sky-400 cursor-pointer"
+            onClick={updateSingleData}
+          >
+            <SiStopstalk />
+            Open
+          </div>
+        )}
         <div className="flex-center text-slate-800 rounded gap-1 hover:opacity-100 opacity-80 px-1 bg-red-500 cursor-pointer">
           <MdOutlineDeleteSweep />
           Delete

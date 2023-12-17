@@ -29,12 +29,12 @@ export default function SinglePostCard({ data }) {
           <p className="capitalize">{data?.title}</p>
         </h3>
         <div className="text-justify line-clamp-2 capitalize">
-          {data?.post.problem}
+          {data?.post?.problem}
         </div>
         <div className="flex flex-col gap-2">
           <div className="">
             <ul className="flex gap-2 p-1">
-              {data?.tags.slice(0, 4).map((tag) => (
+              {data?.tags?.slice(0, 4).map((tag) => (
                 <li className="tag" key={tag}>
                   {tag}
                 </li>
@@ -45,7 +45,7 @@ export default function SinglePostCard({ data }) {
           <div className="flex gap-1 justify-end">
             <div className="gravatar-wrapper-16">
               <img
-                src={data?.author.photoURL}
+                src={data?.author?.photoURL}
                 alt="Gawain's user avatar"
                 width="16"
                 height="16"
@@ -54,7 +54,7 @@ export default function SinglePostCard({ data }) {
             </div>
 
             <div className="flex">
-              <button className="text-blue-600">{data?.author.name}</button>
+              <button className="text-blue-600">{data?.author?.name}</button>
             </div>
 
             <time>

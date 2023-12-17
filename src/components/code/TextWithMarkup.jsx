@@ -4,12 +4,12 @@ export default function TextWithMarkup({ text }) {
   // Define the regex pattern
   const pattern = /#(.*?)##/gs;
   // Split the text into chunks using the regular expression
-  const chunks = text.split(pattern);
+  const chunks = text?.split(pattern);
   // console.log(chunks);
 
   return (
     <div className="text-gray-400">
-      {chunks.map((chunk, index) => {
+      {chunks?.map((chunk, index) => {
         const text = chunk.replace(/\s+#/g, "#");
 
         if (text.startsWith("#")) {

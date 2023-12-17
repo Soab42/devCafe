@@ -5,6 +5,7 @@ import SinglePostContent from "./route/SinglePostContent";
 import Profile from "./route/Profile";
 import AddQuistion from "./route/AddQuistion";
 import About from "./route/About";
+import EditQuestion from "./route/EditQuestion";
 export default function Content() {
   const route = useSelector((state) => state.route);
   let content;
@@ -18,6 +19,8 @@ export default function Content() {
     content = <AddQuistion />;
   } else if (route === "about") {
     content = <About />;
+  } else if (route === "edit") {
+    content = <EditQuestion />;
   }
   return content;
 }

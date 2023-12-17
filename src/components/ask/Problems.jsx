@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
-export default function Problems({ setInputSwitch, inputSwitch }) {
-  const [problem, setProblems] = useState(null);
+export default function Problems({
+  setInputSwitch,
+  inputSwitch,
+  initialValue,
+}) {
+  const [problem, setProblems] = useState(initialValue);
   return (
     <div
       className={`backdrop-blur-xl shadow-xl p-2 flex flex-col gap-2 rounded-sm ${
@@ -22,6 +26,7 @@ export default function Problems({ setInputSwitch, inputSwitch }) {
         name="problems"
         onChange={(e) => setProblems(e.target.value)}
         disabled={inputSwitch < 1}
+        value={initialValue}
         className="w-full h-24 bg-inherit ring-1 rounded-md outline-none text-slate-300/70  p-2"
       />
 

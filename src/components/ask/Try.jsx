@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { AiFillInfoCircle } from "react-icons/ai";
-export default function Try({ setInputSwitch, inputSwitch }) {
+export default function Try({ setInputSwitch, inputSwitch, initialValue }) {
   const inputRef = useRef();
+
   const handleAddText = () => {
     // Add your desired text at the end of the current value
     inputRef.current.value += `
@@ -28,6 +29,7 @@ export default function Try({ setInputSwitch, inputSwitch }) {
         type="text"
         name="try"
         ref={inputRef}
+        defaultValue={initialValue}
         disabled={inputSwitch < 2}
         className="w-full h-24 bg-inherit ring-1 rounded-md outline-none text-slate-300/70  p-2"
       />

@@ -3,58 +3,37 @@ import Search from "../components/form/Search";
 import SinglePostCard from "../components/post/SinglePostCard";
 import Pagination from "../components/utils/Pagination";
 import { useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database";
-import { DB } from "../firebase";
 import { addAllData } from "../feature/data/allDataSlice";
 import { addLoading, removeLoading } from "../feature/loading/loadingSlice";
+import { getAllPosts } from "../database/getAllPosts";
 
 export default function AllPostList() {
   const search = useSelector((state) => state.filter.search) ?? "";
   // console.log(search);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.loading);
   const perPage = 10;
   const dispatch = useDispatch();
   useEffect(() => {
-    function getData() {
+    async function getData() {
       dispatch(addLoading());
-      const dataRef = ref(DB, "devcafe/data");
-      const postsArray = [];
+      const postsArray = await getAllPosts();
+      console.log(postsArray);
+      if (postsArray) {
+        setPostData([postsArray]);
+        dispatch(addAllData(postsArray));
+      }
 
-      onValue(dataRef, (snapshot) => {
-        // Check if there is any data in the snapshot
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-
-          // Iterate through user IDs
-          Object.keys(data).forEach((userId) => {
-            // Check if the user has a "post" node
-            if (data[userId].post) {
-              // Iterate through posts for the current user
-              Object.keys(data[userId].post).forEach((postId) => {
-                const postObject = data[userId].post[postId];
-                // Add user ID and post ID to the postsArray
-                postsArray.push({ userId, postId, ...postObject });
-              });
-            }
-          });
-
-          // At this point, postsArray contains all posts from all user IDs
-          setPostData(postsArray);
-          dispatch(addAllData(postsArray));
-          dispatch(removeLoading());
-        } else {
-          console.log("No data found");
-        }
-      });
+      dispatch(removeLoading());
     }
     getData();
   }, []);
+
   const filterData = postData.filter(
     (post) =>
-      post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.tags.includes(search.toLowerCase())
+      post?.title?.toLowerCase().includes(search?.toLowerCase()) ||
+      post?.tags?.includes(search.toLowerCase())
     // post.tags.includes("mongo")
   );
 
@@ -65,14 +44,14 @@ export default function AllPostList() {
   } else if (!loading && !search) {
     content = (
       <>
-        <div className="flex flex-col gap-2 my-2 overflow-scroll">
-          {postData.slice((page - 1) * perPage, page * perPage).map((data) => (
-            <SinglePostCard data={data} key={data.title} />
+        <div className="flex flex-col gap-2 my-2 overflow-scroll" key={"main"}>
+          {postData?.slice((page - 1) * perPage, page * perPage).map((data) => (
+            <SinglePostCard data={data} key={data?.title} />
           ))}
 
           <Pagination
-            postsLength={postData.length}
-            totalPage={Math.ceil(postData.length / perPage)}
+            postsLength={postData?.length}
+            totalPage={Math.ceil(postData?.length / perPage)}
             // totalPage={10}
             pageNo={page}
             setPage={setPage}
@@ -84,7 +63,7 @@ export default function AllPostList() {
   } else if (!loading && search) {
     content = (
       <div className="grid gap-2 mt-2">
-        {filterData.map((data) => (
+        {filterData?.map((data) => (
           <SinglePostCard data={data} key={data.title} />
         ))}
       </div>

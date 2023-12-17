@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
 
-export default function TitleInput({ setInputSwitch, inputSwitch }) {
-  const [title, setTitle] = useState(null);
+export default function TitleInput({
+  setInputSwitch,
+  inputSwitch,
+  initialValue,
+}) {
+  const [title, setTitle] = useState(initialValue);
   return (
     <div className="backdrop-blur-xl shadow-xl p-2 flex flex-col gap-2 rounded-sm">
       <div>
@@ -13,6 +17,7 @@ export default function TitleInput({ setInputSwitch, inputSwitch }) {
       <input
         type="text"
         name="title"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
         className="w-full h-8 bg-inherit ring-1 rounded-md outline-none text-slate-300/70 pl-4 "
       />

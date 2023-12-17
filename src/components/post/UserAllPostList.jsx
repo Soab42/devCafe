@@ -39,7 +39,7 @@ export default function UserAllPostList() {
       });
     }
     getData();
-  }, []);
+  }, [postData]);
   return (
     <div>
       <h1 className="title bg-red-200/10 text-center font-bold text-[#936648] tracking-[.61rem] flex-center relative">
@@ -51,8 +51,8 @@ export default function UserAllPostList() {
         {postData
           .filter(
             (post) =>
-              post.title.toLowerCase().includes(search.toLowerCase()) ||
-              post.tags.includes(search.toLowerCase())
+              post?.title?.toLowerCase().includes(search.toLowerCase()) ||
+              post?.tags?.includes(search.toLowerCase())
             // post.tags.includes("mongo")
           )
           .map((data) => (

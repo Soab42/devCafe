@@ -1,7 +1,7 @@
 import { ref, push, update, serverTimestamp } from "firebase/database";
 import { DB } from "../firebase";
 
-export const addData = (data, user) => {
+export const addData = async (data, user) => {
   // Create a reference to the location where you want to push the data
   const dataRef = ref(DB, "devcafe/data/" + user.id + "/post");
   // console.log(data);
@@ -15,10 +15,14 @@ export const addData = (data, user) => {
     time: serverTimestamp(),
   };
   // Push the data to the specified location
-  const newPostRef = push(dataRef, post);
-  const newDataRef = ref(DB, "devcafe/data/" + user.id + "/post/" + newPostRef);
+  const newPostRef = await push(dataRef, post);
+  console.log("uid", newPostRef);
+  const newDataRef = ref(
+    DB,
+    "devcafe/data/" + user.id + "/post/" + newPostRef.key
+  );
 
-  update(newDataRef, { postId: newPostRef });
+  update(newDataRef, { postId: newPostRef.key, userId: user.id });
 
   //   console.log("Data pushed:", data);
   //   console.log("New post reference:", newPostRef.key);

@@ -3,7 +3,7 @@ import Author from "./Author";
 import AnswerForm from "../form/AnswerForm";
 import TextWithMarkup from "../code/TextWithMarkup";
 
-export default function Answer({ answer }) {
+export default function Answer({ answer, status }) {
   // Object.values(answer).map((ans) => console.log(ans));
   return (
     <div className="answer flex flex-col gap-1 text-slate-400">
@@ -15,19 +15,23 @@ export default function Answer({ answer }) {
       </div>
       {Object?.keys(answer)?.map((key, i) => {
         return (
-          <div key={answer[key].time} className="flex flex-col gap-1 mt-1">
+          <div key={answer[key]?.time} className="flex flex-col gap-1 mt-1">
             <div className="font-bold text-xl">#{i + 1}</div>
             {/* <div>{ans.text}</div> */}
-            <TextWithMarkup text={answer[key].text} />
+            <TextWithMarkup text={answer[key]?.text} />
             <div className="h-2"></div>
-            <Comments comments={answer[key].comment} answerId={key} />
+            <Comments
+              comments={answer[key]?.comment}
+              answerId={key}
+              status={status}
+            />
             <div className="h-2"></div>
 
             <div>
               <Author
-                author={answer[key].author}
-                time={answer[key].time}
-                icon={answer[key].icon}
+                author={answer[key]?.author}
+                time={answer[key]?.time}
+                icon={answer[key]?.icon}
                 ans={true}
               />
             </div>
@@ -36,9 +40,7 @@ export default function Answer({ answer }) {
           </div>
         );
       })}
-      <div className="anserForm">
-        <AnswerForm />
-      </div>
+      <div className="anserForm">{!status && <AnswerForm />}</div>
     </div>
   );
 }

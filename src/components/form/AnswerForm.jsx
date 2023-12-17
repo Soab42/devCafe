@@ -2,28 +2,33 @@ import { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addAnswer } from "../../database/addAnswer";
-import { addSingleData } from "../../feature/data/singleDataSlice";
-import { getSinglePost } from "../../database/getSinglePost";
 import { getUserInfo } from "../../utils/selector/getUserInfo";
-import { IoInformation, IoInformationCircle, IoReader } from "react-icons/io5";
+import { addStateChange } from "../../feature/state/stateChengeSlice.js";
+
+// import { IoInformation, IoInformationCircle, IoReader } from "react-icons/io5";
 import Error from "../utils/Error";
 export default function AnswerForm() {
   const [error, setError] = useState();
-  const { userId, postId } = useSelector((state) => state.singleData);
+  const singleData = useSelector((state) => state.singleData);
   const { user } = useSelector(getUserInfo);
   // const user = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   // console.log(singleContent);
+  const stateChange = useSelector((state) => state.stateChange);
 
   const inputRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (inputRef?.current.value) {
-      addAnswer(user, userId, postId, inputRef.current.value);
+    if ((inputRef?.current.value, singleData?.userId, singleData?.postId)) {
+      addAnswer(
+        user,
+        singleData?.userId,
+        singleData?.postId,
+        inputRef.current.value
+      );
 
-      const newData = await getSinglePost(userId, postId);
-      dispatch(addSingleData({ ...newData, userId: userId, postId: postId }));
-      // console.log("newData", newData);
+      dispatch(addStateChange(!stateChange));
+
       inputRef.current.value = null;
     } else {
       setError("Please write Something");

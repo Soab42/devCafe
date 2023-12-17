@@ -1,19 +1,19 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../feature/loginmodal/modalSlice";
-import { getSinglePost } from "../../database/getSinglePost";
-import { addSingleData } from "../../feature/data/singleDataSlice";
 import { addComment } from "../../database/addComment";
 import Error from "../utils/Error.jsx";
+import { addStateChange } from "../../feature/state/stateChengeSlice.js";
 export default function CommentForm({ answerId }) {
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState("");
   const [error, setError] = useState(null);
   const accessToken = useSelector((state) => state.users.accessToken);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [openModalState, setOpenModalState] = useState(false);
 
-  const { userId, postId } = useSelector((state) => state.singleData);
+  const singleData = useSelector((state) => state.singleData);
+  const stateChange = useSelector((state) => state.stateChange);
 
   const user = useSelector((state) => state.users.user);
 
@@ -23,9 +23,15 @@ export default function CommentForm({ answerId }) {
     setError(null);
     try {
       if (comment) {
-        addComment(user, userId, postId, comment, answerId);
-        const newData = await getSinglePost(userId, postId);
-        dispatch(addSingleData({ ...newData, userId: userId, postId: postId }));
+        addComment(
+          user,
+          singleData?.userId,
+          singleData?.postId,
+          comment,
+          answerId
+        );
+
+        dispatch(addStateChange(!stateChange));
         setComment("");
       } else {
         setError("Input field cannot be empty!");

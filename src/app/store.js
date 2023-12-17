@@ -7,6 +7,7 @@ import filterSliceReducer from "../feature/filter/filterSlice";
 import loadingSliceReducer from "../feature/loading/loadingSlice";
 import singleDataSliceReducer from "../feature/data/singleDataSlice";
 import allDataSliceReducer from "../feature/data/allDataSlice";
+import stateChangeReducer from "../feature/state/stateChengeSlice";
 export const store = configureStore({
   reducer: {
     users: authSliceReducer,
@@ -14,6 +15,7 @@ export const store = configureStore({
     route: routeSliceReducer,
     filter: filterSliceReducer,
     loading: loadingSliceReducer,
+    stateChange: stateChangeReducer,
     singleData: singleDataSliceReducer,
     allData: allDataSliceReducer,
   },

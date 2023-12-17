@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import ProblemsInput from "../components/ask/Problems";
-import Suggestions from "../components/ask/Suggestions";
-import Title from "../components/ask/Title";
+
 import TitleInput from "../components/ask/TitleInput";
 import TryInput from "../components/ask/Try";
 import TagsInput from "../components/ask/Tags";
@@ -11,7 +10,7 @@ import TagsInput from "../components/ask/Tags";
 import { useDispatch, useSelector } from "react-redux";
 import { editData } from "../database/editData";
 import { singleQuestionsRouteOn } from "../feature/route/routeSlice";
-import { addSingleData } from "../feature/data/singleDataSlice";
+import { addStateChange } from "../feature/state/stateChengeSlice";
 import useLocalStorage from "../common/hooks/useLocalStorage";
 import { getUserInfo } from "../utils/selector/getUserInfo";
 import { openModal } from "../feature/loginmodal/modalSlice";
@@ -20,6 +19,8 @@ import Error from "../components/utils/Error";
 export default function EditQuestion() {
   const [inputSwitch, setInputSwitch] = useState(4);
   const [error, setError] = useState(null);
+  const stateChange = useSelector((state) => state.stateChange);
+
   const dispatch = useDispatch();
   const { user } = useSelector(getUserInfo);
   const singleData = useSelector((state) => state.singleData);
@@ -48,8 +49,8 @@ export default function EditQuestion() {
       const editedData = editData({ ...formData, tags }, user, singleData);
       if (editedData) {
         // console.log(editedData);
-        setSingleDataValue(editedData);
-        dispatch(addSingleData(editData));
+
+        dispatch(addStateChange(!stateChange));
         dispatch(singleQuestionsRouteOn());
       }
     } else {

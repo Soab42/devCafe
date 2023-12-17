@@ -19,9 +19,9 @@ export default function AllPostList() {
     async function getData() {
       dispatch(addLoading());
       const postsArray = await getAllPosts();
-      console.log(postsArray);
+      // console.log(postsArray);
       if (postsArray) {
-        setPostData([postsArray]);
+        setPostData(postsArray);
         dispatch(addAllData(postsArray));
       }
 

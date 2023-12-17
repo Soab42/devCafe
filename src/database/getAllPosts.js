@@ -1,20 +1,3 @@
-// import { onValue, ref } from "firebase/database";
-// import { DB } from "../firebase";
-
-// export function getAllPosts() {
-//   const dataRef = ref(DB, "devcafe/data");
-
-//   onValue(dataRef, (snapshot) => {
-//     // Check if there is any data in the snapshot
-//     if (snapshot.exists()) {
-//       const data = snapshot.val();
-//       return data;
-//     } else {
-//       console.log("No data found");
-//     }
-//   });
-// }
-
 import { ref, onValue } from "firebase/database";
 import { DB } from "../firebase";
 
@@ -28,11 +11,18 @@ export const getAllPosts = () => {
       dataRef,
       (snapshot) => {
         if (snapshot.exists()) {
-            let allPosts = 
+          let allPosts = [];
           const postData = snapshot.val();
-
-
-          resolve(Object.values(postData));
+          Object.keys(postData)
+            .map((key) => postData[key])
+            .map((value) =>
+              Object.keys(value.post).map((key) =>
+                allPosts.push(value.post[key])
+              )
+            );
+          // data.map((value) => console.log(value.post));
+          // console.log("data", data);
+          resolve(allPosts);
         } else {
           // Handle the case where the data doesn't exist
           resolve(null);

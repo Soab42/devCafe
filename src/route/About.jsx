@@ -2,6 +2,7 @@ import React from "react";
 
 export default function About() {
   return (
+    <div>hi</div>
     // <div>
     //   DevCafe Documentation Table of Contents Introduction Getting Started
     //   Account Creation Profile Setup Navigating DevCafe Home Page Categories
@@ -58,6 +59,5 @@ export default function About() {
     //   DevCafe. Providing clear and concise information will contribute to a
     //   positive user experience on your platform.
     // </div>
-    
   );
 }

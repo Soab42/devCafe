@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import CommentForm from "../form/CommentForm";
 
-export default function Comments({ comments, answerId }) {
+export default function Comments({ comments, answerId, status }) {
   // console.log(answerId);
 
   return (
@@ -26,7 +26,7 @@ export default function Comments({ comments, answerId }) {
             );
           })}
       </div>
-      <CommentForm answerId={answerId} />
+      {!status && <CommentForm answerId={answerId} />}
     </div>
   );
 }

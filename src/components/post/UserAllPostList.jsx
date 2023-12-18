@@ -58,6 +58,15 @@ export default function UserAllPostList() {
           .map((data) => (
             <SinglePostCard data={data} key={data.title} />
           ))}
+        {postData.length === 0 && (
+          <div className="flex-center h-[50vh] text-3xl flex-col">
+            <p className="text-sky-600 capitalize">No Data Available!</p>
+            <span className="text-lg mt-4 text-slate-600">
+              If You Have Any Question, Please! {!user?.id && "Login And"} Ask A
+              Question.
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

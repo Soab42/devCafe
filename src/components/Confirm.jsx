@@ -16,10 +16,13 @@ export default function Confirm() {
     console.log(res);
     setSuccess(res);
     if (res) {
-      dispatch(closeModal());
-      dispatch(addSingleData(undefined));
-      dispatch(allQuestionsRouteOn());
-      setSuccess(!success);
+      setTimeout(() => {
+        dispatch(closeModal());
+        dispatch(addSingleData(undefined));
+        dispatch(allQuestionsRouteOn());
+        setSuccess(!success);
+        setSuccess(!res);
+      }, 1000);
     }
   };
   return (

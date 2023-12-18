@@ -220,8 +220,9 @@ export default function About() {
           If you like the project you can explore more on my
           <a
             className="underline pl-1 text-sky-400"
-            href="syfuddhin.netlify.app"
+            href="https://syfuddhin.netlify.app"
             target="_blank"
+            rel="noreferrer"
           >
             portfolio
           </a>

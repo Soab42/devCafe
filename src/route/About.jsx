@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <div className="flex flex-col gap-2 text-sm text-justify text-sky-300/70 mb-10">
-      <p className="text-xl font-bold text-teal-500">DevCafe Documentation</p>
+    <div className="flex flex-col gap-2 text-sm text-justify text-sky-300/70 mb-10 p-4">
+      <p className="text-xl font-bold bg-slate-500/20 p-2 text-center text-sky-600">
+        DevCafe Documentation
+      </p>
       <p>
         Welcome to the DevCafe Documentation, your go-to resource for
         understanding and navigating the DevCafe platform. This documentation
@@ -179,7 +181,7 @@ export default function About() {
         If you encounter any issues or have specific inquiries, reach out to our
         support team at
       </p>
-      <div className="flex-center gap-4 ">
+      <div className="flex-center gap-4  mt-4">
         <a
           href="mailto:syfuddhin@gmail.com"
           target="_blank"
@@ -215,7 +217,7 @@ export default function About() {
           /soab-mahmud-4a202787
         </a>
       </div>
-      <div className="flex-center mt-2">
+      <div className="flex-center mt-6">
         <p>
           If you like the project you can explore more on my
           <a
@@ -229,7 +231,7 @@ export default function About() {
           {""}.
         </p>
       </div>
-      <p className="mt-2 text-xl text-pink-400 text-center bg-black/20 p-2">
+      <p className="mt-5 text-xl text-pink-400 text-center bg-black/20 p-2">
         Enjoy your journey on DevCafe and happy coding 💙🥰!
       </p>
     </div>
